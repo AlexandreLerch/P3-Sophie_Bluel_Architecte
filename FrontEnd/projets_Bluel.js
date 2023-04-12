@@ -28,3 +28,33 @@ function genererProjets(projets){
 // premier affichage de la page
 genererProjets(projets);
 //////FIN DU CODE CORRESPONDANT AU PREMIER AFFICHAGE DE LA PAGE
+
+
+//////CODE CORRESPONDANT AUX FILTRES DES CATEGORIES
+
+const categories = await fetch("http://localhost:5678/api/categories")
+const cat = await categories.json();
+
+
+const boutonTous = document.createElement("button");
+boutonTous.innerText = "Tous";
+document.querySelector(".filtres").appendChild(boutonTous);
+boutonTous.addEventListener("click", function() {
+    document.querySelector(".gallery").innerHTML = "";
+    genererProjets(projets)
+});
+
+for (let i = 0 ; i < cat.length; i++) {
+    const bouton = document.createElement("button");
+    bouton.innerText = cat[i].name
+    bouton.addEventListener("click", function () {
+        const filtre = projets.filter(function (projet) {
+            return projet.categoryId == i+1;
+            });  
+            document.querySelector(".gallery").innerHTML = "";
+            genererProjets(filtre);
+        });
+
+        document.querySelector(".filtres").appendChild(bouton);
+}
+//////FIN DU CODE CORRESPONDANT AUX FILTRES DES CATEGORIES

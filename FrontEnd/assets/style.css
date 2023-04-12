@@ -47,17 +47,20 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
 body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
-header {
+
+#bandeau_de_navigation {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 38px 150px 92px 150px;
 }
+
 section {
 	margin: 50px 0
 }
@@ -75,7 +78,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+	margin-top: 4px;
 }
 
 h2{
@@ -84,23 +87,41 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+p {
+	color: #3D3D3D;
+
+}
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	font-size: 1.2em;
 }
+
 nav li {
 	padding: 0 10px;
-	font-size: 1.2em;
+}
+
+nav li a {
+	text-decoration: none;
+	color: #000000;
+}
+
+nav li b {
+	font-weight: 700;
+	text-decoration: none;
 }
 
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
+	padding-bottom: 139px;
+	position: relative;
 }
 #introduction figure {
 	flex: 1
@@ -186,3 +207,115 @@ footer nav ul {
 	margin: 2em
 }
 
+.filtres {
+	display: flex;
+	justify-content: center;
+	margin-top: 0;
+	margin-bottom: 34px;
+	gap: 10px;
+	width: 100%;
+}
+
+.filtres button {
+	font-family: 'Syne';
+	font-size: 1em;
+	color: #1D6154;
+	font-weight: 700;
+	width: auto;
+	padding: min(10px);
+	padding-left: 2%;
+	padding-right: 2%;
+	min-width: 100px;
+	height: 37px;
+	border-radius: 120px;
+	background-color: transparent;
+	border: 1px solid #1D6154;
+	
+	}
+
+button:hover {
+	color: white;
+	background-color: #1D6154;
+}
+
+.appartements {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.hotelsrestaurants {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+
+input[type="submit"] {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+#login h2 {
+	text-align: center;
+	margin-bottom: 37px;
+}
+
+#login {
+	width: 33%;
+	margin: 112px auto 372px auto;
+}
+
+#login > * {
+	text-align: center;
+}
+
+#login form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+	margin: 2em 0 1em 0;
+}
+
+#login textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login button {
+	margin : 2.2em auto 1.7em auto;
+	background-color: #1D6154;
+	color: #FFFFFF;
+	width: 179px;
+}
+
+#login a {
+	color: #3D3D3D;
+	text-align: center;
+	text-decoration: underline;
+}
+
+#formulaire_de_connection #bouton_connection {
+	width: 179px;
+	height: 36px;
+}
