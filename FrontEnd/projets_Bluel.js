@@ -70,9 +70,8 @@ if(sessionStorage.getItem('adminToken')) {
 ////////FIN DE EFFACEMENT DES FILTRES SI CONNECTRION OK/////////////
 
 
+//////////OUVERTURE DE LA MODALE1 AU CLICK DU BOUTON MODIFIER
 
-
-OU
 let modal = null
 
 //OUVERTURE DE LA MODALE AU CLICK DU BOUTON MODIFIER
@@ -81,7 +80,7 @@ const openModal = function(e) {
     const target = document.querySelector('#modal1')
     target.style.display = null
     target.setAttribute('aria-hidden', false)
-    target.setAttribute('aria-modal', true)
+    target.setAttribute('aria-modal', true)  
     modal = target
     modal.addEventListener('click', closeModal)
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
@@ -109,12 +108,12 @@ e.stopPropagation()
 // Récupération de l'élément du DOM qui accueillera le bouton
 
 //Alimentation de la modale
-let reponse = await fetch("http://localhost:5678/api/works");
-let projets = await reponse.json();
+let reponseModal = await fetch("http://localhost:5678/api/works");
+let projetsModal = await reponseModal.json();
 
-function genererProjetsModal(projets) {
-    for (let i = 0 ; i < projets.length; i++) {
-        const projet = projets[i];
+function genererProjetsModal(projetsModal) {
+    for (let i = 0 ; i < projetsModal.length; i++) {
+        const projet = projetsModal[i];
      
         // Récupération de l'élément du DOM qui accueillera figures
         const galleryModal = document.querySelector(".gallery_modal");
@@ -167,12 +166,12 @@ function genererProjetsModal(projets) {
             //boutonDeplacement.style = "display:none"
             
             figure.appendChild(boutonDeplacement);
-            /*figure.addEventListener("mouseover", function() {
+            figure.addEventListener("mouseover", function() {
                 if(boutonDeplacement.id === figure.id) {
                 boutonDeplacement.style = "display:block"
                 }
             })
-               */
+             
             const iconDeplacement = document.createElement("i");
             iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
             boutonDeplacement.appendChild(iconDeplacement)
@@ -180,10 +179,11 @@ function genererProjetsModal(projets) {
         genererBoutonDeplacement()
     }
  
-} 
+}  
 
 // premier affichage de la page
-document.querySelector(".js-modal").addEventListener('click', openModal, genererProjetsModal(projets))
+document.querySelector(".js-modal").addEventListener('click', openModal)
+genererProjetsModal(projetsModal)
 
 
 
@@ -192,7 +192,7 @@ const modal1 = document.querySelector("#modal1")
 const modal2 = document.querySelector("#modal2")
 const ajout = document.querySelector(".ajout")
 ajout.addEventListener("click", function(){
-    //modal1.style = "display:none"
+    modal1.style = "display:none"
     modal2.style = "display:flex"
 })
 
@@ -206,8 +206,8 @@ document.querySelector(".js-modal-close2").addEventListener("click", function ()
 })
 
 //RECUPERATION DES CATEGORIES & DU TOKEN VIA LE LOCALHOST
-const categories = await fetch("http://localhost:5678/api/categories")
-const cat = await categories.json();
+let categoriesModal = await fetch("http://localhost:5678/api/categories")
+ let catModal = await categoriesModal.json();
 const adminToken = sessionStorage.getItem('adminToken')
 
 //CREATION DE LA FONCTION POUR AJOUTER LES FIGURES
@@ -266,4 +266,4 @@ async function ajoutFigure () {
 formulaire.addEventListener("submit", function(event) {
     event.preventDefault()
     ajoutFigure()
-}) 
+})
