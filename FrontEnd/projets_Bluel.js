@@ -2,6 +2,7 @@
 const reponse = await fetch("http://localhost:5678/api/works");
 const projets = await reponse.json();
 
+
 function genererProjets(projets){
     for (let i = 0 ; i < projets.length; i++) {
         const projet = projets[i];
@@ -27,6 +28,7 @@ function genererProjets(projets){
 }
 // premier affichage de la page
 genererProjets(projets);
+
 //////FIN DU CODE CORRESPONDANT AU PREMIER AFFICHAGE DE LA PAGE
 
 
@@ -77,6 +79,9 @@ let modal = null
 //OUVERTURE DE LA MODALE AU CLICK DU BOUTON MODIFIER
 const openModal = function(e) {
     e.preventDefault()
+
+    genererProjetsModal(projetsModal)
+    
     const target = document.querySelector('#modal1')
     target.style.display = null
     target.setAttribute('aria-hidden', false)
@@ -112,12 +117,14 @@ let reponseModal = await fetch("http://localhost:5678/api/works");
 let projetsModal = await reponseModal.json();
 
 function genererProjetsModal(projetsModal) {
-    for (let i = 0 ; i < projetsModal.length; i++) {
+    
+    // Récupération de l'élément du DOM qui accueillera figures
+    const galleryModal = document.querySelector(".gallery_modal");
+    galleryModal.innerHTML = "";
+
+    for (let i = 0; i < projetsModal.length; i++) {
         const projet = projetsModal[i];
      
-        // Récupération de l'élément du DOM qui accueillera figures
-        const galleryModal = document.querySelector(".gallery_modal");
-
         // Création d’une balise dédiée au projet
         const figure = document.createElement("figure");
         figure.id = "fig" + projet.id
@@ -146,7 +153,7 @@ function genererProjetsModal(projetsModal) {
                     "Authorization": `Bearer ${sessionStorage.adminToken}`,
             }})
             // .then(document.querySelector(".gallery_modal").innerHTML="")
-            .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
+        .then(document.querySelector().removeChild(document.querySelector("#fig" + id)))
             .catch(err => console.log(err))
         })
 
@@ -183,8 +190,6 @@ function genererProjetsModal(projetsModal) {
 
 // premier affichage de la page
 document.querySelector(".js-modal").addEventListener('click', openModal)
-genererProjetsModal(projetsModal)
-
 
 
 //OUVERTURE DE LA GALERIE DE LA MODALE
@@ -192,11 +197,60 @@ const modal1 = document.querySelector("#modal1")
 const modal2 = document.querySelector("#modal2")
 const ajout = document.querySelector(".ajout")
 ajout.addEventListener("click", function(){
-    modal1.style = "display:none"
+    //modal1.style = "display:none"
     modal2.style = "display:flex"
 })
 
-//DEFINISSION DES ACTIONS POUR RETURN & CLOSE
+
+/////////AFFICHAGE IMG SELECTIONNEE
+const formulaireAjout = document.querySelector("#formulaire_ajout_figure")
+    // Affichage vignette 
+    //récupération de l'url de l'image
+let inputFileModal = document.querySelector("#ajout_image")
+const box = document.querySelector(".boite_grise")
+const vignette = document.createElement("img")
+
+inputFileModal.addEventListener("change", function(){
+    const file = inputFileModal.files[0]
+    vignette.src=  URL.createObjectURL(file)
+    box.appendChild(vignette)
+
+    if (file==null){        
+        console.log("pouet")
+    } else{console.log(file)}
+})
+
+/*
+    if (titleValue && file) {
+        } else {alert("Formulaire incomplet")
+    }
+
+    //transformation de la valeur en number
+    function roughScale(x, base) {
+        const parsed = parseInt(x, base);
+        if (isNaN(parsed)) {
+            return 0
+        } else {
+            return parsed;
+        }     
+    }
+    let categoryValueInt = roughScale(categoryValue, 10)
+
+
+
+    
+}
+
+formulaire.addEventListener("submit", function(event) {
+    event.preventDefault()
+    ajoutFigure()
+}) 
+
+*/
+////////////////////////////////////////
+
+
+//DEFINITION DES ACTIONS POUR RETURN & CLOSE
 document.querySelector(".js-modal-return").addEventListener("click", function () {
     modal1.style="display:flex"
     modal2.style = "display:none"
@@ -206,9 +260,17 @@ document.querySelector(".js-modal-close2").addEventListener("click", function ()
 })
 
 //RECUPERATION DES CATEGORIES & DU TOKEN VIA LE LOCALHOST
-let categoriesModal = await fetch("http://localhost:5678/api/categories")
- let catModal = await categoriesModal.json();
+// let categoriesModal = await fetch("http://localhost:5678/api/categories")
+// let catModal = await categoriesModal.json();
 const adminToken = sessionStorage.getItem('adminToken')
+
+cat.forEach(element => {    
+    const option = document.createElement("option");
+    option.value = element.id
+    option.innerText = element.name
+    document.querySelector("#category").appendChild(option)
+});
+
 
 //CREATION DE LA FONCTION POUR AJOUTER LES FIGURES
 const formulaire = document.querySelector("#formulaire_ajout_figure")
@@ -262,8 +324,12 @@ async function ajoutFigure () {
         })
     }
 }
-
 formulaire.addEventListener("submit", function(event) {
     event.preventDefault()
+    event.stopPropagation()
     ajoutFigure()
+    document.querySelector("#formulaire_ajout_figure").reset()
+    //alert("test")
+    modal2.style="display:none"
+    modal1.style="display:flex"
 })
