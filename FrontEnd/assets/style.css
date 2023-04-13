@@ -489,21 +489,30 @@ footer nav ul {
 
 /* ce qui suit concerne la modale 2*/
 
-
 #modal2 .modal-wrapper {
 	width: 630px;
 }
 
 .modal-wrapper .boite_grise {
 	display: flex;
+	position: relative;
 	flex-direction: column;
 	align-items: center;
 	width: 420px;
 	height: 169px;
 	background-color:  #E8F1F7;
 	border-radius: 3px;
-	
-	}
+}
+
+
+#vignette {
+	display: flex;
+	max-height: 169px;
+	width: auto;
+	height: 100%;
+	position: absolute;
+	z-index: 0;
+}
 
 .modal-wrapper .fa-regular {
 	margin-top: 28px;
@@ -547,14 +556,8 @@ footer nav ul {
 	opacity: 0.5;
 	}
 
-#vignette {
-	display: flex;
-	max-height: 169px;
-	width: auto;
-	height: 100%;
-	position: absolute;
-	z-index: 3;
-}
+
+
 
 .boite_grise h3 {
 	margin-top: 7px;

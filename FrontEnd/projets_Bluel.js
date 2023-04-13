@@ -213,6 +213,7 @@ const vignette = document.createElement("img")
 inputFileModal.addEventListener("change", function(){
     const file = inputFileModal.files[0]
     vignette.src=  URL.createObjectURL(file)
+    vignette.id="vignette"
     box.appendChild(vignette)
 
     if (file==null){        
