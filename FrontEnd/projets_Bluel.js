@@ -12,6 +12,7 @@ function genererProjets(projets){
 
         // Création d’une balise dédiée au projet
         const figure = document.createElement("figure");
+        figure.id="figure" +projet.id
                 
         // Création des balises 
         const image = document.createElement("img");
@@ -153,7 +154,12 @@ function genererProjetsModal(projetsModal) {
                     "Authorization": `Bearer ${sessionStorage.adminToken}`,
             }})
             // .then(document.querySelector(".gallery_modal").innerHTML="")
-        .then(document.querySelector().removeChild(document.querySelector("#fig" + id)))
+        .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
+        .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
+        
+
+        //.then(const figureToSupress = document.querySelector("#figure" + id)
+        //(console.log(figureToSupress)))
             .catch(err => console.log(err))
         })
 
@@ -197,10 +203,15 @@ const modal1 = document.querySelector("#modal1")
 const modal2 = document.querySelector("#modal2")
 const ajout = document.querySelector(".ajout")
 ajout.addEventListener("click", function(){
+  // let vignetteToSuppress = document.querySelector("#vignette")
+  // vignetteToSuppress=null
+  //  console.log(vignetteToSuppress)
+  //  if(file.ok) {console.log("file présent")} else{console.log("pas de file")}
+    //.then(genererProjetsModal(projetsModal))
+    //modal2.reset()
     //modal1.style = "display:none"
     modal2.style = "display:flex"
 })
-
 
 /////////AFFICHAGE IMG SELECTIONNEE
 const formulaireAjout = document.querySelector("#formulaire_ajout_figure")
@@ -216,9 +227,7 @@ inputFileModal.addEventListener("change", function(){
     vignette.id="vignette"
     box.appendChild(vignette)
 
-    if (file==null){        
-        console.log("pouet")
-    } else{console.log(file)}
+    
 })
 
 /*
@@ -274,7 +283,6 @@ cat.forEach(element => {
 
 
 //CREATION DE LA FONCTION POUR AJOUTER LES FIGURES
-const formulaire = document.querySelector("#formulaire_ajout_figure")
 
 
 let inputFile = document.querySelector("#ajout_image")
@@ -323,14 +331,27 @@ async function ajoutFigure () {
             },
             body: formData
         })
+        
+        .then(box.removeChild(document.querySelector("#vignette")))
+        //)
+        .then(console.log(file))
+        .then(console.log(inputFile))
+        ///////On essaie d'ajouter directement la photo à la modale
+
+
+        //.catch(err => console.log(err))
+        
     }
 }
-formulaire.addEventListener("submit", function(event) {
+
+formulaireAjout.addEventListener("submit", function(event) {
     event.preventDefault()
     event.stopPropagation()
     ajoutFigure()
-    document.querySelector("#formulaire_ajout_figure").reset()
-    //alert("test")
+    let titleValue = document.querySelector("#title")
+    titleValue.value=null
+    
     modal2.style="display:none"
+    genererProjetsModal(projetsModal)
     modal1.style="display:flex"
 })
