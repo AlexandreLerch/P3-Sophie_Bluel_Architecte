@@ -62,6 +62,7 @@ for (let i = 0 ; i < cat.length; i++) {
 }
 //////FIN DU CODE CORRESPONDANT AUX FILTRES DES CATEGORIES
 
+
 ////////EFFACEMENT DES FILTRES SI CONNECTRION OK/////////////
 if(sessionStorage.getItem('adminToken')) {
     const boxFiltres= document.querySelector(".filtres")
@@ -105,6 +106,16 @@ const closeModal = function (e) {
     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null
+    /////// J'en suis à réfléchir ic !!!!!!!
+
+
+
+////////////////////////////
+
+
+
+    /////////////////////
+    document.querySelector(".gallery_modal").innerHTML=""
 }
 
 const stopPropagation = function (e) {
@@ -121,7 +132,7 @@ function genererProjetsModal(projetsModal) {
     
     // Récupération de l'élément du DOM qui accueillera figures
     const galleryModal = document.querySelector(".gallery_modal");
-    galleryModal.innerHTML = "";
+    galleryModal.innerHTML = null
 
     for (let i = 0; i < projetsModal.length; i++) {
         const projet = projetsModal[i];
@@ -191,12 +202,10 @@ function genererProjetsModal(projetsModal) {
         }
         genererBoutonDeplacement()
     }
- 
 }  
 
 // premier affichage de la page
 document.querySelector(".js-modal").addEventListener('click', openModal)
-
 
 //OUVERTURE DE LA GALERIE DE LA MODALE
 const modal1 = document.querySelector("#modal1")
@@ -246,9 +255,6 @@ inputFileModal.addEventListener("change", function(){
     }
     let categoryValueInt = roughScale(categoryValue, 10)
 
-
-
-    
 }
 
 formulaire.addEventListener("submit", function(event) {
@@ -331,8 +337,84 @@ async function ajoutFigure () {
             },
             body: formData
         })
+          //////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
+
+          .then(response => response.json())
+          .then(data => {
+              const galleryModal = document.querySelector(".gallery_modal");
+              const newFigure = document.createElement("figure");
+              newFigure.classList.add("figToAddInModal");
+              galleryModal.appendChild(newFigure)
+              
+              // Création des balises 
+              const newImage = document.createElement("img")
+              let newFile = inputFileModal.files[0]
+              newImage.src = URL.createObjectURL(newFile)
+              newFigure.appendChild(newImage)
+              
+              const figcaption = document.createElement("figcaption");
+            figcaption.innerText = "editer";
+            newFigure.appendChild(figcaption);
         
-        .then(box.removeChild(document.querySelector("#vignette")))
+            const suppression = document.createElement("button");
+            suppression.className = "boutonSuppression"
+            suppression.id = projet.id
+            suppression.type = "submit" 
+            suppression.addEventListener('click', async function() {
+                const id = projet.id
+                await fetch(`http://localhost:5678/api/works/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${sessionStorage.adminToken}`,
+                }})
+                // .then(document.querySelector(".gallery_modal").innerHTML="")
+            .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
+            .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
+        
+
+            //.then(const figureToSupress = document.querySelector("#figure" + id)
+            //(console.log(figureToSupress)))
+                .catch(err => console.log(err))
+            })
+
+
+        figure.appendChild(suppression);
+
+        const iconSuppression = document.createElement("i");
+        iconSuppression.className = "fa-solid fa-trash-can"
+        //iconSuppression.src = "assets/icons/trash-can-solid.svg"
+        suppression.appendChild(iconSuppression)
+        
+        //problème à voir avec le bouton deplacement
+        function genererBoutonDeplacement() {
+            const boutonDeplacement = document.createElement("button");
+            boutonDeplacement.className = "boutonDeplacement"
+            //boutonDeplacement.id = i +1
+            //boutonDeplacement.style = "display:none"
+            
+            figure.appendChild(boutonDeplacement);
+            figure.addEventListener("mouseover", function() {
+                if(boutonDeplacement.id === figure.id) {
+                boutonDeplacement.style = "display:block"
+                }
+            })
+             
+            const iconDeplacement = document.createElement("i");
+            iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
+            boutonDeplacement.appendChild(iconDeplacement)
+        }
+        genererBoutonDeplacement()
+              })
+         .then(box.removeChild(document.querySelector("#vignette")))
+  
+        .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
+        .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
+          .then(box.removeChild(document.querySelector("#vignette")))
+   
+      .catch(error => console.error(error))
+        
+       
         //)
         .then(console.log(file))
         .then(console.log(inputFile))

@@ -710,6 +710,11 @@ select {
 
 .test {
 	width: 330px;
-	height: 330px;
+	height: 130px;
 	background-color: blue;
+}
+
+.figToAddInModal {
+	width: 78px;
+	height: 130px;
 }
