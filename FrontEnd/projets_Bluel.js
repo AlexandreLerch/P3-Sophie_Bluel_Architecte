@@ -156,25 +156,7 @@ async function genererProjetsModal() {
         suppression.className = "boutonSuppression"
         suppression.id = projet.id
         suppression.type = "submit" 
-        suppression.addEventListener('click', async function() {
-            const id = projet.id
-            await fetch(`http://localhost:5678/api/works/${id}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionStorage.adminToken}`,
-            }})
-            // .then(document.querySelector(".gallery_modal").innerHTML="")
-        .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
-        .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
-        
-
-        //.then(const figureToSupress = document.querySelector("#figure" + id)
-        //(console.log(figureToSupress)))
-            .catch(err => console.log(err))
-        })
-
-
+       
         figure.appendChild(suppression);
 
         const iconSuppression = document.createElement("i");
@@ -201,7 +183,33 @@ async function genererProjetsModal() {
             boutonDeplacement.appendChild(iconDeplacement)
         }
         genererBoutonDeplacement()
+
+
+
+        
+         ////FONCTION QUI PERMET DE SUPPRIMER LES PROJETS/////////////////////
+         suppression.addEventListener('click', async function() {
+            const id = projet.id
+            await fetch(`http://localhost:5678/api/works/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionStorage.adminToken}`,
+            }})
+            // .then(document.querySelector(".gallery_modal").innerHTML="")
+        .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
+        .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
+        
+
+
+        
+
+        //.then(const figureToSupress = document.querySelector("#figure" + id)
+        //(console.log(figureToSupress)))
+            .catch(err => console.log(err))
+        })
     }
+
 }  
 
 // premier affichage de la page
@@ -343,23 +351,37 @@ async function ajoutFigure () {
           .then(data => {
               const galleryModal = document.querySelector(".gallery_modal");
               const newFigure = document.createElement("figure");
+              const gallery = document.querySelector(".gallery");
+                const newFigureAccueil = document.createElement("figure");
           
-              newFigure.id="fig"+data.id
+              newFigure.id="fig"+data.id//figure.id = "fig" + projet.id
+              newFigureAccueil.id="fig"+data.id
               //////
               console.log(newFigure.id)
+              console.log(newFigureAccueil.id)
 
               newFigure.classList.add("figures");
               galleryModal.appendChild(newFigure)
+              newFigureAccueil.classList.add("figures");
+              gallery.appendChild(newFigureAccueil)
               
               // Création des balises 
               const newImage = document.createElement("img")
               let newFile = inputFileModal.files[0]
               newImage.src = URL.createObjectURL(newFile)
               newFigure.appendChild(newImage)
+
+              const newImageAccueil = document.createElement("img")
+               let newFileAccueil = inputFile.files[0]
+                newImageAccueil.src = URL.createObjectURL(newFileAccueil)
+                newFigureAccueil.appendChild(newImageAccueil)
               
               const figcaption = document.createElement("figcaption");
             figcaption.innerText = "editer";
             newFigure.appendChild(figcaption);
+            const figcaptionAccueil = document.createElement("figcaption");
+              figcaptionAccueil.innerText = "editer";
+              newFigureAccueil.appendChild(figcaptionAccueil)
         
             const suppression = document.createElement("button");
             
@@ -371,7 +393,17 @@ async function ajoutFigure () {
             newFigure.appendChild(suppression)
            suppression.addEventListener("click",function(){
             document.querySelector(`#${newFigure.id}`).style="display:none"
+            document.querySelector(`#${newFigure.id}`).style="display:none"
+
            })
+
+
+
+
+
+
+
+
             /*suppression.addEventListener('click', async function() {
                 const id = projets.id
                 await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -424,6 +456,33 @@ async function ajoutFigure () {
         }
         genererBoutonDeplacement()
               })
+              ////////////////////////////////////////
+             /* .then(data => {
+                const gallery = document.querySelector(".gallery");
+                const newFigureAccueil = document.createElement("figure");
+            
+                newFigureAccueil.id="fig"+data.id
+                
+                console.log(newFigureAccueil.id)
+  
+                newFigureAccueil.classList.add("figures");
+                gallery.appendChild(newFigureAccueil)
+                
+                // Création des balises 
+                const newImageAccueil = document.createElement("img")
+               let newFileAccueil = inputFile.files[0]
+                newImageAccueil.src = URL.createObjectURL(newFileAccueil)
+                newFigureAccueil.appendChild(newImageAccueil)
+                
+                const figcaptionAccueil = document.createElement("figcaption");
+              figcaptionAccueil.innerText = "editer";
+              newFigureAccueil.appendChild(figcaptionAccueil)
+              })*/
+
+
+
+
+              ///////////////////////////////
         .then(box.removeChild(document.querySelector("#vignette")))
   
        // .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
@@ -453,6 +512,6 @@ formulaireAjout.addEventListener("submit", function(event) {
     titleValue.value=null
     
     modal2.style="display:none"
-    genererProjetsModal()
+    //genererProjetsModal()
     modal1.style="display:flex"
 })
