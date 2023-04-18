@@ -79,10 +79,10 @@ if(sessionStorage.getItem('adminToken')) {
 let modal = null
 
 //OUVERTURE DE LA MODALE AU CLICK DU BOUTON MODIFIER
-const openModal = function(e) {
-
+const openModal = async function(e) {
     e.preventDefault()
-
+    let reponseModal = await fetch("http://localhost:5678/api/works")
+    let projetsModal = await reponseModal.json();
     genererProjetsModal(projetsModal)
     
     const target = document.querySelector('#modal1')
@@ -95,7 +95,7 @@ const openModal = function(e) {
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
-//FERMETURE DE LA MODALE AU CLICK SUR LA CROIX
+//OUVERTURE DE LA MODALE AU CLICK SUR LA CROIX
 const closeModal = function (e) {
     console.log("close")
     if (modal === null) return
@@ -126,11 +126,12 @@ e.stopPropagation()
 // Récupération de l'élément du DOM qui accueillera le bouton
 
 //Alimentation de la modale
-let reponseModal = await fetch("http://localhost:5678/api/works");
-let projetsModal = await reponseModal.json();
 
-function genererProjetsModal(projetsModal) {
-    
+
+async function genererProjetsModal() {
+    document.querySelector(".gallery_modal").innerHTML=""
+    let reponseModal = await fetch("http://localhost:5678/api/works")
+    let projetsModal = await reponseModal.json();
     // Récupération de l'élément du DOM qui accueillera figures
     const galleryModal = document.querySelector(".gallery_modal");
     galleryModal.innerHTML = null
@@ -338,14 +339,13 @@ async function ajoutFigure () {
             },
             body: formData
         })
-//////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
+          //////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
 
-/*        .then(response => response.json())
-        .then(data => {
+          .then(response => response.json())
+          .then(data => {
               const galleryModal = document.querySelector(".gallery_modal");
               const newFigure = document.createElement("figure");
-              newFigure.classList.add("figures")
-              newFigure.id="fig"+projetsModal.id
+              newFigure.classList.add("figures");
               galleryModal.appendChild(newFigure)
               
               // Création des balises 
@@ -360,7 +360,7 @@ async function ajoutFigure () {
         
             const suppression = document.createElement("button");
             suppression.className = "boutonSuppression"
-            suppression.id = projets.id
+            suppression.id = projet.id
             suppression.type = "submit" 
             suppression.addEventListener('click', async function() {
                 const id = projet.id
@@ -407,7 +407,7 @@ async function ajoutFigure () {
             boutonDeplacement.appendChild(iconDeplacement)
         }
         genererBoutonDeplacement()
-              })*/
+              })
         .then(box.removeChild(document.querySelector("#vignette")))
   
         .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
