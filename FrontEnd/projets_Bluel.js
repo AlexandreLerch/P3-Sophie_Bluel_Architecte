@@ -80,6 +80,7 @@ let modal = null
 
 //OUVERTURE DE LA MODALE AU CLICK DU BOUTON MODIFIER
 const openModal = function(e) {
+
     e.preventDefault()
 
     genererProjetsModal(projetsModal)
@@ -94,7 +95,7 @@ const openModal = function(e) {
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
-//OUVERTURE DE LA MODALE AU CLICK SUR LA CROIX
+//FERMETURE DE LA MODALE AU CLICK SUR LA CROIX
 const closeModal = function (e) {
     console.log("close")
     if (modal === null) return
@@ -337,13 +338,14 @@ async function ajoutFigure () {
             },
             body: formData
         })
-          //////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
+//////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
 
-          .then(response => response.json())
-          .then(data => {
+/*        .then(response => response.json())
+        .then(data => {
               const galleryModal = document.querySelector(".gallery_modal");
               const newFigure = document.createElement("figure");
-              newFigure.classList.add("figToAddInModal");
+              newFigure.classList.add("figures")
+              newFigure.id="fig"+projetsModal.id
               galleryModal.appendChild(newFigure)
               
               // Création des balises 
@@ -358,7 +360,7 @@ async function ajoutFigure () {
         
             const suppression = document.createElement("button");
             suppression.className = "boutonSuppression"
-            suppression.id = projet.id
+            suppression.id = projets.id
             suppression.type = "submit" 
             suppression.addEventListener('click', async function() {
                 const id = projet.id
@@ -405,8 +407,8 @@ async function ajoutFigure () {
             boutonDeplacement.appendChild(iconDeplacement)
         }
         genererBoutonDeplacement()
-              })
-         .then(box.removeChild(document.querySelector("#vignette")))
+              })*/
+        .then(box.removeChild(document.querySelector("#vignette")))
   
         .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
         .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
