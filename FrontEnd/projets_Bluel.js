@@ -73,7 +73,6 @@ if(sessionStorage.getItem('adminToken')) {
    } else {console.log("false")}
 ////////FIN DE EFFACEMENT DES FILTRES SI CONNECTRION OK/////////////
 
-
 //////////OUVERTURE DE LA MODALE1 AU CLICK DU BOUTON MODIFIER
 
 let modal = null
@@ -126,7 +125,6 @@ e.stopPropagation()
 // Récupération de l'élément du DOM qui accueillera le bouton
 
 //Alimentation de la modale
-
 
 async function genererProjetsModal() {
     document.querySelector(".gallery_modal").innerHTML=""
@@ -299,7 +297,7 @@ inputFile.setAttribute("accept",".png, .jpg, .jpeg");
 inputFile.type= "file";
 
 async function ajoutFigure () {
-
+    console.log(projets)
     // RECUPERATION DES DONNEES DE L'IMAGE    
 
     // récupération du title
@@ -345,6 +343,11 @@ async function ajoutFigure () {
           .then(data => {
               const galleryModal = document.querySelector(".gallery_modal");
               const newFigure = document.createElement("figure");
+          
+              newFigure.id="fig"+data.id
+              //////
+              console.log(newFigure.id)
+
               newFigure.classList.add("figures");
               galleryModal.appendChild(newFigure)
               
@@ -359,34 +362,43 @@ async function ajoutFigure () {
             newFigure.appendChild(figcaption);
         
             const suppression = document.createElement("button");
+            
             suppression.className = "boutonSuppression"
-            suppression.id = projet.id
-            suppression.type = "submit" 
-            suppression.addEventListener('click', async function() {
-                const id = projet.id
+            //suppression.id = projets.id
+            //newFigure.id = projets.id
+            //console.log(suppression.id)
+            suppression.type = "submit"
+            newFigure.appendChild(suppression)
+           suppression.addEventListener("click",function(){
+            document.querySelector(`#${newFigure.id}`).style="display:none"
+           })
+            /*suppression.addEventListener('click', async function() {
+                const id = projets.id
                 await fetch(`http://localhost:5678/api/works/${id}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${sessionStorage.adminToken}`,
                 }})
-                // .then(document.querySelector(".gallery_modal").innerHTML="")
-            .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
-            .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
+            
+         //   .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
+          //  .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
         
 
             //.then(const figureToSupress = document.querySelector("#figure" + id)
             //(console.log(figureToSupress)))
                 .catch(err => console.log(err))
-            })
+                
+            })*/
 
 
-        figure.appendChild(suppression);
+       
 
         const iconSuppression = document.createElement("i");
         iconSuppression.className = "fa-solid fa-trash-can"
         //iconSuppression.src = "assets/icons/trash-can-solid.svg"
         suppression.appendChild(iconSuppression)
+        //newFigure.appendChlid(suppression)
         
         //problème à voir avec le bouton deplacement
         function genererBoutonDeplacement() {
@@ -394,11 +406,15 @@ async function ajoutFigure () {
             boutonDeplacement.className = "boutonDeplacement"
             //boutonDeplacement.id = i +1
             //boutonDeplacement.style = "display:none"
-            
-            figure.appendChild(boutonDeplacement);
-            figure.addEventListener("mouseover", function() {
-                if(boutonDeplacement.id === figure.id) {
+            /////////////////////////////////
+            ////////////////////////////////
+            ///////////////////////////////
+            //////////////////////////////////////
+            newFigure.appendChild(boutonDeplacement);
+            newFigure.addEventListener("mouseover", function() {
+                if(boutonDeplacement.id === newFigure.id) {
                 boutonDeplacement.style = "display:block"
+                console.log(newFigure.id)
                 }
             })
              
@@ -410,11 +426,11 @@ async function ajoutFigure () {
               })
         .then(box.removeChild(document.querySelector("#vignette")))
   
-        .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
-        .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
-          .then(box.removeChild(document.querySelector("#vignette")))
+       // .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
+        //.then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
+          //.then(box.removeChild(document.querySelector("#vignette")))
    
-      .catch(error => console.error(error))
+      //.catch(error => console.error(error))
         
        
         //)
@@ -432,10 +448,11 @@ formulaireAjout.addEventListener("submit", function(event) {
     event.preventDefault()
     event.stopPropagation()
     ajoutFigure()
+    
     let titleValue = document.querySelector("#title")
     titleValue.value=null
     
     modal2.style="display:none"
-    genererProjetsModal(projetsModal)
+    genererProjetsModal()
     modal1.style="display:flex"
 })
