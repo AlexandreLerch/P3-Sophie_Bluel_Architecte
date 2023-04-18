@@ -692,6 +692,7 @@ select {
 		top: 6px;
 		right: 28px;
 		border-radius: 2px;
+		display: none;
 	}
 
 	.modal .fa-arrows-up-down-left-right, .modal .fa-trash-can {
@@ -701,10 +702,11 @@ select {
 		font-size: 10px;
 	}
 
-	.figures .boutonDeplacement {
-		display: none;
-	}
 	.figures:hover .boutonDeplacement {
+		display: block;
+	}
+
+	.figureModal:hover .boutonDeplacement {
 		display: block;
 	}
 

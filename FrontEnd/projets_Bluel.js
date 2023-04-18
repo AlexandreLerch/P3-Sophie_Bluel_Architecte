@@ -73,11 +73,12 @@ if(sessionStorage.getItem('adminToken')) {
    } else {console.log("false")}
 ////////FIN DE EFFACEMENT DES FILTRES SI CONNECTRION OK/////////////
 
-//////////OUVERTURE DE LA MODALE1 AU CLICK DU BOUTON MODIFIER
 
+
+//////////OUVERTURE DE LA MODALE1 AU CLICK DU BOUTON MODIFIER
 let modal = null
 
-//OUVERTURE DE LA MODALE AU CLICK DU BOUTON MODIFIER
+/////////////OUVERTURE DE LA MODALE AU CLICK DU BOUTON MODIFIER
 const openModal = async function(e) {
     e.preventDefault()
     let reponseModal = await fetch("http://localhost:5678/api/works")
@@ -94,9 +95,8 @@ const openModal = async function(e) {
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
-//OUVERTURE DE LA MODALE AU CLICK SUR LA CROIX
+///////////////////FERMETURE DE LA MODALE AU CLICK SUR LA CROIX
 const closeModal = function (e) {
-    console.log("close")
     if (modal === null) return
     e.preventDefault()
     modal.style.display = 'none'
@@ -106,90 +106,70 @@ const closeModal = function (e) {
     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null
-    /////// J'en suis à réfléchir ic !!!!!!!
-
-
-
-////////////////////////////
-
-
-
-    /////////////////////
-    document.querySelector(".gallery_modal").innerHTML=""
 }
 
 const stopPropagation = function (e) {
 e.stopPropagation()
 }
 
-// Récupération de l'élément du DOM qui accueillera le bouton
-
-//Alimentation de la modale
+////////////////ALIMENTATION DE LA MODALE LORS DE SON OUVERTURE APRES REFRESH
 
 async function genererProjetsModal() {
+    //REMISE A ZERO DE LA GALERIE
     document.querySelector(".gallery_modal").innerHTML=""
+    //RECUPERATION DES WORKS EN FORMAT JSON
     let reponseModal = await fetch("http://localhost:5678/api/works")
     let projetsModal = await reponseModal.json();
-    // Récupération de l'élément du DOM qui accueillera figures
+
+
+    //RECUPERATION DE L'ELEMENT DU DOM QUI ACCUEILLERA LES FIGURES
     const galleryModal = document.querySelector(".gallery_modal");
-    galleryModal.innerHTML = null
+    galleryModal.innerHTML = ""
 
+    //CREATION DE CHACUNE DES FIGURES DE LA GALERIE MODALLE
     for (let i = 0; i < projetsModal.length; i++) {
-        const projet = projetsModal[i];
+        const projetModal = projetsModal[i];
      
-        // Création d’une balise dédiée au projet
-        const figure = document.createElement("figure");
-        figure.id = "fig" + projet.id
-        figure.className = "figures"
-        galleryModal.appendChild(figure);
+        // Création d’une figure dédiée au projet dans la modale
+        const figureModal = document.createElement("figure");
+        figureModal.id = projetModal.id
+        console.log(figureModal.id)
+        figureModal.className = "figureModal"
+        galleryModal.appendChild(figureModal);
                 
-        // Création des balises 
-        const image = document.createElement("img");
-        image.src = projet.imageUrl;
-        figure.appendChild(image)
+        // Création de l'image dans la figure de la modale 
+        const imageModal = document.createElement("img");
+        imageModal.src = projetModal.imageUrl;
+        figureModal.appendChild(imageModal)
 
-        const figcaption = document.createElement("figcaption");
-        figcaption.innerText = "editer";
-        figure.appendChild(figcaption);
+        // Création de la légende dans la figure de la modale 
+        const figModalcaption = document.createElement("figcaption");
+        figModalcaption.innerText = "editer";
+        figureModal.appendChild(figModalcaption);
         
         const suppression = document.createElement("button");
         suppression.className = "boutonSuppression"
-        suppression.id = projet.id
+        //suppression.id = projet.id
         suppression.type = "submit" 
-       
-        figure.appendChild(suppression);
-
+        figureModal.appendChild(suppression)
         const iconSuppression = document.createElement("i");
         iconSuppression.className = "fa-solid fa-trash-can"
         //iconSuppression.src = "assets/icons/trash-can-solid.svg"
         suppression.appendChild(iconSuppression)
         
-        //problème à voir avec le bouton deplacement
-        function genererBoutonDeplacement() {
-            const boutonDeplacement = document.createElement("button");
-            boutonDeplacement.className = "boutonDeplacement"
-            //boutonDeplacement.id = i +1
-            //boutonDeplacement.style = "display:none"
-            
-            figure.appendChild(boutonDeplacement);
-            figure.addEventListener("mouseover", function() {
-                if(boutonDeplacement.id === figure.id) {
-                boutonDeplacement.style = "display:block"
-                }
-            })
-             
-            const iconDeplacement = document.createElement("i");
-            iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
-            boutonDeplacement.appendChild(iconDeplacement)
-        }
-        genererBoutonDeplacement()
+        // Création du bouton déplacmeent dans la figure de la modale  
+        const boutonDeplacement = document.createElement("button");
+        boutonDeplacement.className = "boutonDeplacement"
+        boutonDeplacement.id = i +1
+        figureModal.appendChild(boutonDeplacement);
+        const iconDeplacement = document.createElement("i");
+        iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
+        boutonDeplacement.appendChild(iconDeplacement)
+       
 
-
-
-        
          ////FONCTION QUI PERMET DE SUPPRIMER LES PROJETS/////////////////////
          suppression.addEventListener('click', async function() {
-            const id = projet.id
+            const id = projetModal.id
             await fetch(`http://localhost:5678/api/works/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -197,7 +177,8 @@ async function genererProjetsModal() {
                     "Authorization": `Bearer ${sessionStorage.adminToken}`,
             }})
             // .then(document.querySelector(".gallery_modal").innerHTML="")
-        .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
+            
+            .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
         .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
         
 
@@ -380,7 +361,7 @@ async function ajoutFigure () {
             figcaption.innerText = "editer";
             newFigure.appendChild(figcaption);
             const figcaptionAccueil = document.createElement("figcaption");
-              figcaptionAccueil.innerText = "editer";
+              figcaptionAccueil.innerText = titleValue;
               newFigureAccueil.appendChild(figcaptionAccueil)
         
             const suppression = document.createElement("button");
@@ -392,8 +373,10 @@ async function ajoutFigure () {
             suppression.type = "submit"
             newFigure.appendChild(suppression)
            suppression.addEventListener("click",function(){
-            document.querySelector(`#${newFigure.id}`).style="display:none"
-            document.querySelector(`#${newFigure.id}`).style="display:none"
+            document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + data.id))
+            document.querySelector(".gallery").removeChild(document.querySelector("#figure" + data.id))
+            //document.querySelector(`#${newFigure.id}`).style="display:none"
+            //document.querySelector(`#${newFigureAccueil.id}`).style="display:none"
 
            })
 
@@ -433,27 +416,21 @@ async function ajoutFigure () {
         //newFigure.appendChlid(suppression)
         
         //problème à voir avec le bouton deplacement
-        function genererBoutonDeplacement() {
-            const boutonDeplacement = document.createElement("button");
+         const boutonDeplacement = document.createElement("button");
             boutonDeplacement.className = "boutonDeplacement"
             //boutonDeplacement.id = i +1
-            //boutonDeplacement.style = "display:none"
-            /////////////////////////////////
-            ////////////////////////////////
-            ///////////////////////////////
-            //////////////////////////////////////
+            
+            
             newFigure.appendChild(boutonDeplacement);
-            newFigure.addEventListener("mouseover", function() {
-                if(boutonDeplacement.id === newFigure.id) {
+            /*figureModal.addEventListener("mouseover", function() {
+                if(boutonDeplacement.id === figureModal.id) {
                 boutonDeplacement.style = "display:block"
-                console.log(newFigure.id)
                 }
-            })
+            })*/
              
             const iconDeplacement = document.createElement("i");
             iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
             boutonDeplacement.appendChild(iconDeplacement)
-        }
         genererBoutonDeplacement()
               })
               ////////////////////////////////////////
