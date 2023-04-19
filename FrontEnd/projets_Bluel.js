@@ -4,8 +4,7 @@ const projets = await reponse.json();
 
 
 function genererProjets(projets){
-    for (let i = 0 ; i < projets.length; i++) {
-        const projet = projets[i];
+    projets.forEach(function(projet) {
      
         // Récupération de l'élément du DOM qui accueillera les fiches
         const divGallery = document.querySelector(".gallery")
@@ -26,8 +25,9 @@ function genererProjets(projets){
         figure.appendChild(figcaption);
 
         divGallery.appendChild(figure);
-        }
+    });
 }
+
 // premier affichage de la page
 genererProjets(projets);
 
@@ -36,9 +36,8 @@ genererProjets(projets);
 
 //////CODE CORRESPONDANT AUX FILTRES DES CATEGORIES
 
-const categories = await fetch("http://localhost:5678/api/categories")
+const categories = await fetch("http://localhost:5678/api/categories");
 const cat = await categories.json();
-
 
 const boutonTous = document.createElement("button");
 boutonTous.innerText = "Tous";
@@ -48,19 +47,18 @@ boutonTous.addEventListener("click", function() {
     genererProjets(projets)
 });
 
-for (let i = 0 ; i < cat.length; i++) {
+cat.forEach(function(categorie, index) {
     const bouton = document.createElement("button");
-    bouton.innerText = cat[i].name
-    bouton.addEventListener("click", function () {
-        const filtre = projets.filter(function (projet) {
-            return projet.categoryId == i+1;
-            });  
-            document.querySelector(".gallery").innerHTML = "";
-            genererProjets(filtre);
+    bouton.innerText = categorie.name;
+    bouton.addEventListener("click", function() {
+        const filtre = projets.filter(function(projet) {
+            return projet.categoryId == index + 1;
         });
-
-        document.querySelector(".filtres").appendChild(bouton);
-}
+        document.querySelector(".gallery").innerHTML = "";
+        genererProjets(filtre);
+    });
+    document.querySelector(".filtres").appendChild(bouton);
+})
 //////FIN DU CODE CORRESPONDANT AUX FILTRES DES CATEGORIES
 
 
@@ -125,68 +123,68 @@ async function genererProjetsModal() {
 
 
     //RECUPERATION DE L'ELEMENT DU DOM QUI ACCUEILLERA LES FIGURES
-    const galleryModal = document.querySelector(".gallery_modal");
-    galleryModal.innerHTML = ""
+const galleryModal = document.querySelector(".gallery_modal");
+galleryModal.innerHTML = ""
 
-    //CREATION DE CHACUNE DES FIGURES DE LA GALERIE MODALLE
-    for (let i = 0; i < projetsModal.length; i++) {
-        const projetModal = projetsModal[i];
-     
-        // Création d’une figure dédiée au projet dans la modale
-        const figureModal = document.createElement("figure");
-        figureModal.id = "figureModal"+projetModal.id
-        //console.log(figureModal.id)
-        figureModal.className = "figureModal"
-        galleryModal.appendChild(figureModal);
-                
-        // Création de l'image dans la figure de la modale 
-        const imageModal = document.createElement("img");
-        imageModal.src = projetModal.imageUrl;
-        figureModal.appendChild(imageModal)
+//CREATION DE CHACUNE DES FIGURES DE LA GALERIE MODALLE
+projetsModal.forEach(function(projetModal, i) {
+  // Création d’une figure dédiée au projet dans la modale
+  const figureModal = document.createElement("figure");
+  figureModal.id = "figureModal" + projetModal.id;
+  //console.log(figureModal.id)
+  figureModal.className = "figureModal";
+  galleryModal.appendChild(figureModal);
 
-        // Création de la légende dans la figure de la modale 
-        const figModalcaption = document.createElement("figcaption");
-        figModalcaption.innerText = "editer";
-        figureModal.appendChild(figModalcaption);
-        
-        // Création du bouton déplacmeent dans la figure de la modale  
-        const boutonDeplacement = document.createElement("button");
-        boutonDeplacement.className = "boutonDeplacement"
-        boutonDeplacement.id = i +1
-        figureModal.appendChild(boutonDeplacement);
-        const iconDeplacement = document.createElement("i");
-        iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
-        boutonDeplacement.appendChild(iconDeplacement)
+  // Création de l'image dans la figure de la modale 
+  const imageModal = document.createElement("img");
+  imageModal.src = projetModal.imageUrl;
+  figureModal.appendChild(imageModal);
 
-        // Création du bouton suppression dans la figure de la modale  
-        const suppression = document.createElement("button");
-        suppression.className = "boutonSuppression"
-        //suppression.id = projet.id
-        suppression.type = "submit" 
-        figureModal.appendChild(suppression)
-        const iconSuppression = document.createElement("i");
-        iconSuppression.className = "fa-solid fa-trash-can"
-        //iconSuppression.src = "assets/icons/trash-can-solid.svg"
-        suppression.appendChild(iconSuppression)
-        
-        ////AJOUT DE LA FONCTION QUI PERMET DE SUPPRIMER LES PROJETS/////////////////////
-        suppression.addEventListener('click', async function() {
-            document.querySelector(".gallery_modal").removeChild(document.querySelector("#figureModal"+projetModal.id))
-            document.querySelector(".gallery").removeChild(document.querySelector("#figure" + projetModal.id))
-            
-            //const ids = projetsModal.map(projetsModal => projetsModal.id);
-            //console.log(ids); // Affiche [1, 2, 3]
-            console.log(projetModal.id)
-            const id = projetModal.id
-            await fetch(`http://localhost:5678/api/works/${id}`, {
+  // Création de la légende dans la figure de la modale 
+  const figModalcaption = document.createElement("figcaption");
+  figModalcaption.innerText = "editer";
+  figureModal.appendChild(figModalcaption);
+
+  // Création du bouton déplacmeent dans la figure de la modale  
+  const boutonDeplacement = document.createElement("button");
+  boutonDeplacement.className = "boutonDeplacement";
+  boutonDeplacement.id = i + 1;
+  figureModal.appendChild(boutonDeplacement);
+  const iconDeplacement = document.createElement("i");
+  iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right";
+  boutonDeplacement.appendChild(iconDeplacement);
+
+  // Création du bouton suppression dans la figure de la modale  
+  const suppression = document.createElement("button");
+  suppression.className = "boutonSuppression";
+  //suppression.id = projet.id
+  suppression.type = "submit";
+  figureModal.appendChild(suppression);
+  const iconSuppression = document.createElement("i");
+  iconSuppression.className = "fa-solid fa-trash-can";
+  //iconSuppression.src = "assets/icons/trash-can-solid.svg"
+  suppression.appendChild(iconSuppression);
+
+  ////AJOUT DE LA FONCTION QUI PERMET DE SUPPRIMER LES PROJETS/////////////////////
+  suppression.addEventListener('click', async function() {
+    document.querySelector(".gallery_modal").removeChild(document.querySelector("#figureModal" + projetModal.id));
+    document.querySelector(".gallery").removeChild(document.querySelector("#figure" + projetModal.id));
+
+    //const ids = projetsModal.map(projetsModal => projetsModal.id);
+    //console.log(ids); // Affiche [1, 2, 3]
+    console.log(projetModal.id);
+    const id = projetModal.id;
+    await fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${sessionStorage.adminToken}`,
-            }})
-            .catch(err => console.log(err))
-        })      
-    }
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.adminToken}`,
+        }
+      })
+      .catch(err => console.log(err))
+  })
+});
+
 } 
 
 ////////////////PREMIER AFFICHAGE DE LA MODALE/////////////////
@@ -378,10 +376,6 @@ formulaireAjout.addEventListener("submit", function(event) {
     //genererProjetsModal()
     modal1.style="display:flex"
 })
-
-
-
-
 
 
 

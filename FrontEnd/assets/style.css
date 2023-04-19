@@ -120,7 +120,6 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
-	padding-bottom: 139px;
 	position: relative;
 }
 #introduction figure {
@@ -137,6 +136,7 @@ li:hover {
 #introduction article {
 	flex: 1;
 	margin-left: 71px;
+	margin-right: 245px ;
 }
 
 #introduction h2 {
@@ -164,6 +164,7 @@ h3 {
 	display: flex;
 	justify-content: center;
 	position: relative;
+	margin-top: 108px;
 	margin-bottom: 51px;
 }
 
@@ -177,6 +178,10 @@ h3 {
 	font-size: 1em;
 	align-items: center;
 	color: black
+}
+
+.modif2{
+	 margin-top:15px;
 }
 
 #portfolio .modif {
@@ -238,8 +243,18 @@ button:hover {
 	grid-row-gap: 20px;
 }
 
+.gallery figure {
+	height: 400px;
+	width: 330px;
+	padding: 15px;
+	overflow: hidden;
+
+}
+
 .gallery img {
 	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 #contact {
@@ -461,12 +476,21 @@ footer nav ul {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		width: 78px;
-	;
+		width: 80px;
+		height: 130px;
+		overflow: hidden;
+		padding-bottom: 10px;
 	}
 	
+	figcaption{
+		font-family: 'Work Sans';
+		font-size: 1em;
+	}
+
 	.modal img {
 		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 	
 	aside .ajout {
