@@ -1,4 +1,4 @@
-//////CODE CORRESPONDANT AU PREMIER AFFICHAGE DE LA PAGE
+/*//////CODE CORRESPONDANT AU PREMIER AFFICHAGE DE LA PAGE
 const reponse = await fetch("http://localhost:5678/api/works");
 const projets = await reponse.json();
 
@@ -185,11 +185,8 @@ async function genererProjetsModal() {
             "Authorization": `Bearer ${sessionStorage.adminToken}`,
             }})
             .catch(err => console.log(err))
-        }
-            
-        )
+        })      
     }
-
 } 
 
 ////////////////PREMIER AFFICHAGE DE LA MODALE/////////////////
@@ -214,9 +211,27 @@ inputFileModal.addEventListener("change", function(){
     vignette.src=  URL.createObjectURL(file)
     vignette.id="vignette"
     box.appendChild(vignette)
-    })
+})
 
-    
+////////DEFINITION DES ACTIONS POUR RETURN & CLOSE
+document.querySelector(".js-modal-return").addEventListener("click", function () {
+    modal1.style="display:flex"
+    modal2.style = "display:none"
+})
+document.querySelector(".js-modal-close2").addEventListener("click", function () {
+    modal2.style="display:none"
+})
+
+////////RECUPERATION DES CATEGORIES & DU TOKEN VIA LE LOCALHOST
+const adminToken = sessionStorage.getItem('adminToken')
+
+cat.forEach(element => {    
+    const option = document.createElement("option");
+    option.value = element.id
+    option.innerText = element.name
+    document.querySelector("#category").appendChild(option)
+})
+  
 
 /*
     if (titleValue && file) {
@@ -242,53 +257,32 @@ formulaire.addEventListener("submit", function(event) {
 }) 
 
 */
-////////////////////////////////////////
 
 
-//DEFINITION DES ACTIONS POUR RETURN & CLOSE
-document.querySelector(".js-modal-return").addEventListener("click", function () {
-    modal1.style="display:flex"
-    modal2.style = "display:none"
-})
-document.querySelector(".js-modal-close2").addEventListener("click", function () {
-    modal2.style="display:none"
-})
-
-//RECUPERATION DES CATEGORIES & DU TOKEN VIA LE LOCALHOST
-const adminToken = sessionStorage.getItem('adminToken')
-
-cat.forEach(element => {    
-    const option = document.createElement("option");
-    option.value = element.id
-    option.innerText = element.name
-    document.querySelector("#category").appendChild(option)
-});
 
 
-//CREATION DE LA FONCTION POUR AJOUTER LES FIGURES
 
-
+////////CREATION DE LA FONCTION POUR AJOUTER LES FIGURES///////////
+//récupération de l'image à insérer dans la figure à créer
 let inputFile = document.querySelector("#ajout_image")
 inputFile.classList.add("fileInput");
 inputFile.setAttribute("accept",".png, .jpg, .jpeg");
-inputFile.type= "file";
+inputFile.type= "file"
 
 async function ajoutFigure () {
-    console.log(projets)
     // RECUPERATION DES DONNEES DE L'IMAGE    
-
-    // récupération du title
+    // récupération du title et de la catégorie depuis le formulaire "formulaireAjout"
     const titleValue = document.querySelector("#title").value
     let categoryValue = document.querySelector("#category").value;
-    //récupération de l'url de l'image
-    let inputFile = document.querySelector("#ajout_image")
+    //récupération de l'url de l'image depuis le formulaire "formulaireAjout"
     const file = inputFile.files[0]
-
+    //Alerte et blocage si le formulaire est incomplet
     if (titleValue && file) {
         } else {alert("Formulaire incomplet")
+        return
     }
 
-    //transformation de la valeur en number
+    //transformation de la valeur de l'id de "string" en "number"
     function roughScale(x, base) {
         const parsed = parseInt(x, base);
         if (isNaN(parsed)) {
@@ -305,6 +299,7 @@ async function ajoutFigure () {
     formData.append('image', file)
     formData.append('category', categoryValueInt)
 
+    //ENVOI DU FORMDATA A L'API POUR POSTER L'IMAGE, S'L EXISTE
     if (formData) {
         await fetch('http://localhost:5678/api/works', {
             method: 'POST',
@@ -485,3 +480,4 @@ formulaireAjout.addEventListener("submit", function(event) {
     //genererProjetsModal()
     modal1.style="display:flex"
 })
+*/
