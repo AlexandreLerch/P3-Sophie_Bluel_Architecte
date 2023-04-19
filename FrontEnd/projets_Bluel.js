@@ -1,4 +1,4 @@
-/*//////CODE CORRESPONDANT AU PREMIER AFFICHAGE DE LA PAGE
+//////CODE CORRESPONDANT AU PREMIER AFFICHAGE DE LA PAGE
 const reponse = await fetch("http://localhost:5678/api/works");
 const projets = await reponse.json();
 
@@ -232,36 +232,6 @@ cat.forEach(element => {
     document.querySelector("#category").appendChild(option)
 })
   
-
-/*
-    if (titleValue && file) {
-        } else {alert("Formulaire incomplet")
-    }
-
-    //transformation de la valeur en number
-    function roughScale(x, base) {
-        const parsed = parseInt(x, base);
-        if (isNaN(parsed)) {
-            return 0
-        } else {
-            return parsed;
-        }     
-    }
-    let categoryValueInt = roughScale(categoryValue, 10)
-
-}
-
-formulaire.addEventListener("submit", function(event) {
-    event.preventDefault()
-    ajoutFigure()
-}) 
-
-*/
-
-
-
-
-
 ////////CREATION DE LA FONCTION POUR AJOUTER LES FIGURES///////////
 //récupération de l'image à insérer dans la figure à créer
 let inputFile = document.querySelector("#ajout_image")
@@ -309,57 +279,94 @@ async function ajoutFigure () {
             },
             body: formData
         })
-
-
-
-
         
-          //////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
+ //////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
+        .then(response => response.json())
+        .then(data => {
+            //Création des nouvelles figures dans la modale et sur la page d'accueil
+            const galleryModal = document.querySelector(".gallery_modal");
+            const newFigureModal = document.createElement("figure")
+            const gallery = document.querySelector(".gallery");
+            const newFigureAccueil = document.createElement("figure")
+            //Ajout des id aux nouvelles figrues
+            newFigureModal.id="figureModal"+data.id
+            newFigureAccueil.id="figure" +data.id
+            console.log(newFigureModal)
 
-          .then(response => response.json())
-          .then(data => {
-              const galleryModal = document.querySelector(".gallery_modal");
-              const newFigure = document.createElement("figure");
-              const gallery = document.querySelector(".gallery");
-                const newFigureAccueil = document.createElement("figure");
-          
-              newFigure.id="fig"+data.id//figure.id = "fig" + projet.id
-              newFigureAccueil.id="fig"+data.id
-              //////
-              console.log(newFigure.id)
-              console.log(newFigureAccueil.id)
+            //Ajout des class aux nouvelles figrues
+            newFigureModal.classList.add("figureModal");
+            newFigureAccueil.classList.add("figure");
 
-              newFigure.classList.add("figures");
-              galleryModal.appendChild(newFigure)
-              newFigureAccueil.classList.add("figures");
-              gallery.appendChild(newFigureAccueil)
-              
-              // Création des balises 
-              const newImage = document.createElement("img")
-              let newFile = inputFileModal.files[0]
-              newImage.src = URL.createObjectURL(newFile)
-              newFigure.appendChild(newImage)
-
-              const newImageAccueil = document.createElement("img")
-               let newFileAccueil = inputFile.files[0]
-                newImageAccueil.src = URL.createObjectURL(newFileAccueil)
-                newFigureAccueil.appendChild(newImageAccueil)
-              
-              const figcaption = document.createElement("figcaption");
-            figcaption.innerText = "editer";
-            newFigure.appendChild(figcaption);
-            const figcaptionAccueil = document.createElement("figcaption");
-              figcaptionAccueil.innerText = titleValue;
-              newFigureAccueil.appendChild(figcaptionAccueil)
-        
-            const suppression = document.createElement("button");
+            //lien des nouvelles figures à leur parent
+            galleryModal.appendChild(newFigureModal)
+            gallery.appendChild(newFigureAccueil)
             
-            suppression.className = "boutonSuppression"
+            //Insertion des images aux nouvelles figures modales
+            const newImageModal = document.createElement("img")
+            let newFile = inputFileModal.files[0]
+            newImageModal.src = URL.createObjectURL(newFile)
+            newFigureModal.appendChild(newImageModal)
+
+            //Insertion des images aux nouvelles figures de la page d'accueil
+            const newImageAccueil = document.createElement("img")
+            let newFileAccueil = inputFile.files[0]
+            newImageAccueil.src = URL.createObjectURL(newFileAccueil)
+            newFigureAccueil.appendChild(newImageAccueil)
+
+            //Insertion des légendes aux nouvelles figures modales
+            const figcaptionModal = document.createElement("figcaption");
+            figcaptionModal.innerText = "editer";
+            newFigureModal.appendChild(figcaptionModal);
+
+            //Insertion des légendes aux nouvelles figures de la page d'accueil
+            const figcaptionAccueil = document.createElement("figcaption");
+            figcaptionAccueil.innerText = titleValue;
+            newFigureAccueil.appendChild(figcaptionAccueil)
+
+            //Création du bouton suppression dans les nouvelles figures modales
+            const newSuppression = document.createElement("button");
+            newSuppression.className = "boutonSuppression"
+            newSuppression.type = "submit"
+            newFigureModal.appendChild(newSuppression)
+            const iconSuppression = document.createElement("i");
+            iconSuppression.className = "fa-solid fa-trash-can"
+                    //iconSuppression.src = "assets/icons/trash-can-solid.svg"
+            newSuppression.appendChild(iconSuppression)
+        
+            //Création des boutons déplacement
+            const newBoutonDeplacement = document.createElement("button");
+            newBoutonDeplacement.className = "boutonDeplacement"
+            //boutonDeplacement.id = i +1
+            newFigureModal.appendChild(newBoutonDeplacement)
+            const newIconDeplacement = document.createElement("i");
+            newIconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
+            newBoutonDeplacement.appendChild(newIconDeplacement)
+
+            console.log(newFigureModal)
+            console.log(newFigureAccueil)
+
+        })
+
+
+
+
+
+
+
+
+
+      /*  
+         
+
+              
+            
+        
+            
             //suppression.id = projets.id
             //newFigure.id = projets.id
             //console.log(suppression.id)
-            suppression.type = "submit"
-            newFigure.appendChild(suppression)
+            
+            
            suppression.addEventListener("click",function(){
             document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + data.id))
             document.querySelector(".gallery").removeChild(document.querySelector("#figure" + data.id))
@@ -393,35 +400,6 @@ async function ajoutFigure () {
                 .catch(err => console.log(err))
                 
             })*/
-
-
-       
-
-        const iconSuppression = document.createElement("i");
-        iconSuppression.className = "fa-solid fa-trash-can"
-        //iconSuppression.src = "assets/icons/trash-can-solid.svg"
-        suppression.appendChild(iconSuppression)
-        //newFigure.appendChlid(suppression)
-        
-        //problème à voir avec le bouton deplacement
-         const boutonDeplacement = document.createElement("button");
-            boutonDeplacement.className = "boutonDeplacement"
-            //boutonDeplacement.id = i +1
-            
-            
-            newFigure.appendChild(boutonDeplacement);
-            /*figureModal.addEventListener("mouseover", function() {
-                if(boutonDeplacement.id === figureModal.id) {
-                boutonDeplacement.style = "display:block"
-                }
-            })*/
-             
-            const iconDeplacement = document.createElement("i");
-            iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
-            boutonDeplacement.appendChild(iconDeplacement)
-        genererBoutonDeplacement()
-              })
-              ////////////////////////////////////////
              /* .then(data => {
                 const gallery = document.querySelector(".gallery");
                 const newFigureAccueil = document.createElement("figure");
@@ -446,7 +424,7 @@ async function ajoutFigure () {
 
 
 
-
+/*
               ///////////////////////////////
         .then(box.removeChild(document.querySelector("#vignette")))
   
@@ -464,11 +442,14 @@ async function ajoutFigure () {
 
 
         //.catch(err => console.log(err))
-        
+        */
     }
 }
 
+
+
 formulaireAjout.addEventListener("submit", function(event) {
+    box.removeChild(document.querySelector("#vignette"))
     event.preventDefault()
     event.stopPropagation()
     ajoutFigure()
@@ -480,4 +461,3 @@ formulaireAjout.addEventListener("submit", function(event) {
     //genererProjetsModal()
     modal1.style="display:flex"
 })
-*/
