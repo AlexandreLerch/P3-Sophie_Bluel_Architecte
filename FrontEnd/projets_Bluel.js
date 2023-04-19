@@ -279,7 +279,7 @@ async function ajoutFigure () {
             },
             body: formData
         })
-        
+
  //////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
         .then(response => response.json())
         .then(data => {
@@ -323,6 +323,15 @@ async function ajoutFigure () {
             figcaptionAccueil.innerText = titleValue;
             newFigureAccueil.appendChild(figcaptionAccueil)
 
+            //Création des boutons déplacement
+            const newBoutonDeplacement = document.createElement("button");
+            newBoutonDeplacement.className = "boutonDeplacement"
+            //boutonDeplacement.id = i +1
+            newFigureModal.appendChild(newBoutonDeplacement)
+            const newIconDeplacement = document.createElement("i");
+            newIconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
+            newBoutonDeplacement.appendChild(newIconDeplacement)
+
             //Création du bouton suppression dans les nouvelles figures modales
             const newSuppression = document.createElement("button");
             newSuppression.className = "boutonSuppression"
@@ -333,21 +342,42 @@ async function ajoutFigure () {
                     //iconSuppression.src = "assets/icons/trash-can-solid.svg"
             newSuppression.appendChild(iconSuppression)
         
-            //Création des boutons déplacement
-            const newBoutonDeplacement = document.createElement("button");
-            newBoutonDeplacement.className = "boutonDeplacement"
-            //boutonDeplacement.id = i +1
-            newFigureModal.appendChild(newBoutonDeplacement)
-            const newIconDeplacement = document.createElement("i");
-            newIconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
-            newBoutonDeplacement.appendChild(newIconDeplacement)
-
-            console.log(newFigureModal)
-            console.log(newFigureAccueil)
-
+            //"Mise en service" du bouton suppression pour les nouvelles figures de la modale
+            newSuppression.addEventListener("click",function(){
+               // document.querySelector(".gallery_modal").removeChild(document.querySelector(".figureModal" + data.id))
+                //document.querySelector(".gallery").removeChild(document.querySelector(".figure" + data.id))
+                document.querySelector(`#${newFigureModal.id}`).style="display:none"
+                document.querySelector(`#${newFigureAccueil.id}`).style="display:none"
+                console.log(data.id)
+    
+                const id = data.id
+                fetch(`http://localhost:5678/api/works/${id}`, {
+             method: "DELETE",
+             headers: {
+                 "Content-Type": "application/json",
+                 "Authorization": `Bearer ${sessionStorage.adminToken}`,
+                 }})
+                 .catch(err => console.log(err))
+               })
         })
 
 
+    }
+}
+
+formulaireAjout.addEventListener("submit", function(event) {
+    box.removeChild(document.querySelector("#vignette"))
+    event.preventDefault()
+    event.stopPropagation()
+    ajoutFigure()
+    
+    let titleValue = document.querySelector("#title")
+    titleValue.value=null
+    
+    modal2.style="display:none"
+    //genererProjetsModal()
+    modal1.style="display:flex"
+})
 
 
 
@@ -367,13 +397,7 @@ async function ajoutFigure () {
             //console.log(suppression.id)
             
             
-           suppression.addEventListener("click",function(){
-            document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + data.id))
-            document.querySelector(".gallery").removeChild(document.querySelector("#figure" + data.id))
-            //document.querySelector(`#${newFigure.id}`).style="display:none"
-            //document.querySelector(`#${newFigureAccueil.id}`).style="display:none"
-
-           })
+           
 
 
 
@@ -443,21 +467,4 @@ async function ajoutFigure () {
 
         //.catch(err => console.log(err))
         */
-    }
-}
-
-
-
-formulaireAjout.addEventListener("submit", function(event) {
-    box.removeChild(document.querySelector("#vignette"))
-    event.preventDefault()
-    event.stopPropagation()
-    ajoutFigure()
     
-    let titleValue = document.querySelector("#title")
-    titleValue.value=null
-    
-    modal2.style="display:none"
-    //genererProjetsModal()
-    modal1.style="display:flex"
-})
