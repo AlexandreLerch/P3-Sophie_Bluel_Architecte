@@ -13,6 +13,7 @@ function genererProjets(projets){
         // Création d’une balise dédiée au projet
         const figure = document.createElement("figure");
         figure.id="figure" +projet.id
+        figure.classList.add("figure")
                 
         // Création des balises 
         const image = document.createElement("img");
@@ -120,6 +121,7 @@ async function genererProjetsModal() {
     //RECUPERATION DES WORKS EN FORMAT JSON
     let reponseModal = await fetch("http://localhost:5678/api/works")
     let projetsModal = await reponseModal.json();
+    console.log(projetsModal)
 
 
     //RECUPERATION DE L'ELEMENT DU DOM QUI ACCUEILLERA LES FIGURES
@@ -132,8 +134,8 @@ async function genererProjetsModal() {
      
         // Création d’une figure dédiée au projet dans la modale
         const figureModal = document.createElement("figure");
-        figureModal.id = projetModal.id
-        console.log(figureModal.id)
+        figureModal.id = "figureModal"+projetModal.id
+        //console.log(figureModal.id)
         figureModal.className = "figureModal"
         galleryModal.appendChild(figureModal);
                 
@@ -147,6 +149,16 @@ async function genererProjetsModal() {
         figModalcaption.innerText = "editer";
         figureModal.appendChild(figModalcaption);
         
+        // Création du bouton déplacmeent dans la figure de la modale  
+        const boutonDeplacement = document.createElement("button");
+        boutonDeplacement.className = "boutonDeplacement"
+        boutonDeplacement.id = i +1
+        figureModal.appendChild(boutonDeplacement);
+        const iconDeplacement = document.createElement("i");
+        iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
+        boutonDeplacement.appendChild(iconDeplacement)
+
+        // Création du bouton suppression dans la figure de la modale  
         const suppression = document.createElement("button");
         suppression.className = "boutonSuppression"
         //suppression.id = projet.id
@@ -157,76 +169,54 @@ async function genererProjetsModal() {
         //iconSuppression.src = "assets/icons/trash-can-solid.svg"
         suppression.appendChild(iconSuppression)
         
-        // Création du bouton déplacmeent dans la figure de la modale  
-        const boutonDeplacement = document.createElement("button");
-        boutonDeplacement.className = "boutonDeplacement"
-        boutonDeplacement.id = i +1
-        figureModal.appendChild(boutonDeplacement);
-        const iconDeplacement = document.createElement("i");
-        iconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
-        boutonDeplacement.appendChild(iconDeplacement)
-       
-
-         ////FONCTION QUI PERMET DE SUPPRIMER LES PROJETS/////////////////////
-         suppression.addEventListener('click', async function() {
+        ////AJOUT DE LA FONCTION QUI PERMET DE SUPPRIMER LES PROJETS/////////////////////
+        suppression.addEventListener('click', async function() {
+            document.querySelector(".gallery_modal").removeChild(document.querySelector("#figureModal"+projetModal.id))
+            document.querySelector(".gallery").removeChild(document.querySelector("#figure" + projetModal.id))
+            
+            //const ids = projetsModal.map(projetsModal => projetsModal.id);
+            //console.log(ids); // Affiche [1, 2, 3]
+            console.log(projetModal.id)
             const id = projetModal.id
             await fetch(`http://localhost:5678/api/works/${id}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionStorage.adminToken}`,
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${sessionStorage.adminToken}`,
             }})
-            // .then(document.querySelector(".gallery_modal").innerHTML="")
-            
-            .then(document.querySelector(".gallery_modal").removeChild(document.querySelector("#fig" + id)))
-        .then(document.querySelector(".gallery").removeChild(document.querySelector("#figure" + id)))
-        
-
-
-        
-
-        //.then(const figureToSupress = document.querySelector("#figure" + id)
-        //(console.log(figureToSupress)))
             .catch(err => console.log(err))
-        })
+        }
+            
+        )
     }
 
-}  
+} 
 
-// premier affichage de la page
+////////////////PREMIER AFFICHAGE DE LA MODALE/////////////////
 document.querySelector(".js-modal").addEventListener('click', openModal)
+
 
 //OUVERTURE DE LA GALERIE DE LA MODALE
 const modal1 = document.querySelector("#modal1")
 const modal2 = document.querySelector("#modal2")
 const ajout = document.querySelector(".ajout")
 ajout.addEventListener("click", function(){
-  // let vignetteToSuppress = document.querySelector("#vignette")
-  // vignetteToSuppress=null
-  //  console.log(vignetteToSuppress)
-  //  if(file.ok) {console.log("file présent")} else{console.log("pas de file")}
-    //.then(genererProjetsModal(projetsModal))
-    //modal2.reset()
-    //modal1.style = "display:none"
     modal2.style = "display:flex"
 })
 
-/////////AFFICHAGE IMG SELECTIONNEE
+/////////AFFICHAGE IMG SELECTIONNEE (VIGNETTE)
 const formulaireAjout = document.querySelector("#formulaire_ajout_figure")
-    // Affichage vignette 
-    //récupération de l'url de l'image
 let inputFileModal = document.querySelector("#ajout_image")
 const box = document.querySelector(".boite_grise")
 const vignette = document.createElement("img")
-
 inputFileModal.addEventListener("change", function(){
     const file = inputFileModal.files[0]
     vignette.src=  URL.createObjectURL(file)
     vignette.id="vignette"
     box.appendChild(vignette)
+    })
 
     
-})
 
 /*
     if (titleValue && file) {
@@ -265,8 +255,6 @@ document.querySelector(".js-modal-close2").addEventListener("click", function ()
 })
 
 //RECUPERATION DES CATEGORIES & DU TOKEN VIA LE LOCALHOST
-// let categoriesModal = await fetch("http://localhost:5678/api/categories")
-// let catModal = await categoriesModal.json();
 const adminToken = sessionStorage.getItem('adminToken')
 
 cat.forEach(element => {    
@@ -326,6 +314,11 @@ async function ajoutFigure () {
             },
             body: formData
         })
+
+
+
+
+        
           //////////////AJOUT INSTANTANNEE DE LA FIGURE DANS LA MODALE///////////////////////////
 
           .then(response => response.json())
