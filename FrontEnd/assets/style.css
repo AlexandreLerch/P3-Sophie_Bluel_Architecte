@@ -48,6 +48,7 @@ table {
 }
 /** end reset css**/
 
+/*****body du code*****/
 body {
 	display: flex;
 	flex-direction: column;
@@ -57,17 +58,11 @@ body {
 	font-size: 14px;
 }
 
+/*****header du code*****/
 header {
 	width: 100%;
 	max-width: 1140px;
 	justify-content: space-between;
-}
-
-main {
-	width: 940px;
-	display: flex;
-	flex-direction: column;
-	
 }
 
 #bandeau_de_navigation {
@@ -92,17 +87,6 @@ h1 > span {
 	margin-top: 4px;
 }
 
-h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
-}
-
-p {
-	color: #3D3D3D;
-
-}
 nav ul {
 	display: flex;
 	align-items: center;
@@ -124,10 +108,66 @@ nav li b {
 	text-decoration: none;
 }
 
-li:hover {
-	color: #B1663C;
+	/*ce qui suit n'apparait qu'en mode édition concerne le mode edition*/
+#bandeau_mode_edition {
+	position: relative;
+	width: 100%;
+	display: flex;
+	grid-template-columns: auto auto 216px;
+	grid-template-rows: auto auto 38px;
+	height: 58px;
+	background-color: #000000;
+	justify-content: center;
+	align-items: center;
 }
 
+#bandeau_mode_edition i {
+	color: #FFFFFF;
+}
+
+#bandeau_mode_edition h2 {
+	font-family: 'Work Sans';
+	font-size: 1.2em;
+	color: #FFFFFF;
+	font-weight: 400;
+	margin-left: 12px;
+	margin-right: 21px;
+}
+
+#bandeau_mode_edition button {
+	font-family: 'Work Sans';
+	font-size: 1em;
+	background-color: #FFFFFF;
+	font-weight: 500;
+	min-width: 100px;
+	height: 37px;
+	border-radius: 120px;
+	border: 1px solid #1D6154;
+	margin: 0;
+	padding: 0 23px;
+	}
+
+#bandeau_mode_edition button:hover {
+		color: white;
+		background-color: #1D6154;
+	}
+
+#bandeau_noir {
+	position: absolute;
+	width: 100%;
+	height: 58px;
+	background-color: #000000;
+}
+/*****fin du header du code*****/
+
+/*****main du code*****/
+main {
+	width: 940px;
+	display: flex;
+	flex-direction: column;
+}
+
+/*****section introduction du code*****/
 #introduction {
 	display: flex;
 	width: 100%;
@@ -161,6 +201,27 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+
+h2{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
+}
+
+p {
+	color: #3D3D3D;
+
+}
+
+
+
+li:hover {
+	color: #B1663C;
+}
+
+
 
 h3 {
 	margin-left: 11px;
@@ -666,57 +727,8 @@ select {
 
 
 
-/*ce qui suit concerne le mode edition*/
-#bandeau_noir {
-	position: absolute;
-	width: 100%;
-	height: 58px;
-	background-color: #000000;
-}
 
-#bandeau_mode_edition {
-	position: relative;
-	width: 100%;
-	display: flex;
-	grid-template-columns: auto auto 216px;
-	grid-template-rows: auto auto 38px;
-	height: 58px;
-	background-color: #000000;
-	justify-content: center;
-	align-items: center;
 
-}
-
-#bandeau_mode_edition i {
-	color: #FFFFFF;
-}
-
-#bandeau_mode_edition h2 {
-	font-family: 'Work Sans';
-	font-size: 1.2em;
-	color: #FFFFFF;
-	font-weight: 400;
-	margin-left: 12px;
-	margin-right: 21px;
-}
-
-#bandeau_mode_edition button {
-	font-family: 'Work Sans';
-	font-size: 1em;
-	background-color: #FFFFFF;
-	font-weight: 500;
-	min-width: 100px;
-	height: 37px;
-	border-radius: 120px;
-	border: 1px solid #1D6154;
-	margin: 0;
-	padding: 0 23px;
-	}
-
-	#bandeau_mode_edition button:hover {
-		color: white;
-		background-color: #1D6154;
-	}
 
 	#contact {
 		margin-top: 57px;
