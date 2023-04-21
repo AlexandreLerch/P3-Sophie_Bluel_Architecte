@@ -201,39 +201,24 @@ main {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+/*****fin section introduction du code*****/
 
 
-h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
-}
-
-p {
-	color: #3D3D3D;
-
-}
-
-
-
+/***fje ne sais pas à quoi cela corespond*****/
 li:hover {
 	color: #B1663C;
 }
 
 
 
-h3 {
-	margin-left: 11px;
-}
 
-/* Concerne le partfolio */
+
+/********Portfolio ************/
 
 #portfolio {
 	display: flex;
 	flex-direction: column;
 	justify-content: right;
-	
 }
 
 #portfolio .projet_modif {
@@ -246,27 +231,6 @@ h3 {
 
 #portfolio .projet_modif a {
 	margin-left : 31px;
-}
-
-.modif{
-	display: flex;
-	position: absolute;
-	font-size: 1em;
-	align-items: center;
-	color: black
-}
-
-.modif2{
-	 margin-top:15px;
-}
-
-#portfolio .modif {
-	
-	top: 9px;position: relative;
-}
-
-article .modif {
-top: 19px;
 }
 
 .filtres {
@@ -292,8 +256,7 @@ top: 19px;
 	border-radius: 120px;
 	background-color: transparent;
 	border: 1px solid #1D6154;
-	
-	}
+}
 
 button:hover {
 	color: white;
@@ -332,6 +295,10 @@ button:hover {
 	object-fit: cover;
 }
 
+/********fin du Portfolio ************/
+
+/********Section contact ************/
+
 #contact {
 	width: 379px;
 	margin: auto;
@@ -352,10 +319,6 @@ button:hover {
 	align-items: center;
 	width: 379px;
 	
-}
-
-#formulaire_contact {
-	width: 379px;
 }
 
 #contact input {
@@ -394,7 +357,9 @@ button:hover {
 	text-align: center;
 	border-radius: 60px ;
 }
+/********fin Section contact ************/
 
+/******** Section footer ************/
 footer{
 	width: 1140px;
 	padding-right: 90px;
@@ -405,6 +370,10 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em;
 }
+
+/******** fin Section footer ************/
+
+/******** PAGE DE CONNECTION ************/
 
 #login h2 {
 	text-align: center;
@@ -421,10 +390,11 @@ footer nav ul {
 }
 
 #login form {
+	display: flex;
 	text-align: left;
 	margin-top: 30px;
-	display: flex;
 	flex-direction: column;
+	justify-content: center;
 }
 
 #login input {
@@ -456,11 +426,6 @@ footer nav ul {
 	text-decoration: underline;
 }
 
-#formulaire_de_connection {
-	display: flex;
-	justify-content: center;
-}
-
 #formulaire_de_connection #bouton_connection {
 	width: 179px;
 	height: 36px;
@@ -476,7 +441,9 @@ footer nav ul {
 	margin-bottom: 28px;
 }
 
-/* ce qui suit concerne les modales */
+/******** FIN DE LA PAGE DE CONNECTION ************/
+
+/********CE QUI SUIT CONCRENE LES MODALES********/
 
 .modal {
 	display: flex;
@@ -491,7 +458,7 @@ footer nav ul {
 	overflow: scroll;
 }
 
-/* ce qui suit concerne la modale 1*/
+/********** ce qui suit concerne la modale 1*********/
 .modal-wrapper {
 	position: relative;
 	display: flex;
@@ -502,7 +469,6 @@ footer nav ul {
 	padding-bottom: 48px;
 	border-radius: 3px;
 }
-
 	.js-modal-close {
 		position: absolute;
 		top: 26px;
@@ -527,19 +493,6 @@ footer nav ul {
 		justify-content: center;	
 		align-items: center;
 		background-color: transparent;
-	}
-	
-	.js-modal-return {
-		position: absolute;
-		background-color: transparent;
-		top: 26px;
-		left: 30px;
-		display: flex;
-		border: none;
-		height: 2em;
-		width: 2em;
-		justify-content: center;	
-		align-items: center;
 	}
 	
 	.modal-wrapper h2 {
@@ -583,7 +536,6 @@ footer nav ul {
 		object-fit: cover;
 	}
 	
-	
 	.modal-wrapper h3 {
 		color: #D65353;
 		margin-top: 32px;
@@ -608,6 +560,18 @@ footer nav ul {
 	margin-bottom: 30px;
 }
 
+.js-modal-return {
+	position: absolute;
+	background-color: transparent;
+	top: 26px;
+	left: 30px;
+	display: flex;
+	border: none;
+	height: 2em;
+	width: 2em;
+	justify-content: center;	
+	align-items: center;
+}
 
 #vignette {
 	display: flex;
@@ -640,7 +604,7 @@ footer nav ul {
 	color: #306685;
 	font-weight: 700;
 	opacity: 0.5;
-	}
+}
 
 .boite_grise .title-upload-image {
 	display: flex;
@@ -658,8 +622,7 @@ footer nav ul {
 	color: #306685;
 	font-weight: 700;
 	opacity: 0.5;
-	}
-
+}
 
 .boite_grise h3 {
 	margin-top: 7px;
@@ -686,8 +649,6 @@ footer nav ul {
 #modal2 input {
 	width:100%;
 }
-
-
 .fenetre {
 	background-color: #FFFFFF;
 	height: 50px;
@@ -795,3 +756,41 @@ select {
 	width: 78px;
 	height: 130px;
 }
+/*****valable pour tout le site*****/
+.modif{
+	display: flex;
+	position: absolute;
+	font-size: 1em;
+	align-items: center;
+	color: black;
+}
+
+article .modif {
+top: 19px;
+}
+
+.modif2{
+	 margin-top:15px;
+}
+
+#portfolio .modif {
+	position: relative;
+	top: 9px;
+}
+
+h2{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
+}
+
+h3 {
+	margin-left: 11px;
+}
+
+p {
+	color: #3D3D3D;
+}
+/*****fin valable pour tout le site*****/
+
