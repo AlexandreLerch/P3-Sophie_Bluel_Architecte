@@ -48,11 +48,19 @@ table {
 }
 /** end reset css**/
 
-body {
+
+
+/* ////////////MISE EN PAGE DE LA PAGE D'ACCUEIL//////////////*/
+main {
 	max-width: 1140px;
 	margin:auto;
-	font-family: 'Work Sans' ;
+	font-family: 'Work Sans';
 	font-size: 14px;
+}
+
+header {
+	max-width: 1140px;
+	margin:auto;
 }
 
 #bandeau_de_navigation {
@@ -291,11 +299,7 @@ button:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact .envoi {
-	width: 179px;
-	height: 36px;
-	padding: 0;
-}
+
 #contact form label {
 	display: flex;
 	margin: 2em 0 1em 0;
@@ -304,25 +308,33 @@ button:hover {
 
 #contact textarea {
 	border: none;
-	width: 379px;
+	width: 100%;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+#contact input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
 	width: 180px;
+	height: 36px;
 	text-align: center;
 	border-radius: 60px ;
 }
 
+
+
 footer nav ul {
+	position: relative;
+	font-family: 'Work Sans';
+	right: 107px;
+	margin: auto;
+	margin-top: 44px;
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em;
+	margin-bottom: 2em;
 }
 
 #login h2 {
@@ -409,7 +421,7 @@ footer nav ul {
 	
 	}
 
-	.js-modal-close {
+.js-modal-close {
 		position: absolute;
 		top: 26px;
 		right: 30px;
@@ -422,7 +434,7 @@ footer nav ul {
 		background-color: transparent;
 	}
 	
-	.js-modal-close2 {
+.js-modal-close2 {
 		position: absolute;
 		top: 26px;
 		right: 30px;
@@ -435,7 +447,7 @@ footer nav ul {
 		background-color: transparent;
 	}
 	
-	.js-modal-return {
+.js-modal-return {
 		position: absolute;
 		background-color: transparent;
 		top: 26px;
@@ -448,20 +460,17 @@ footer nav ul {
 		align-items: center;
 	}
 	
-	.modal-wrapper h2 {
+.modal-wrapper h2 {
 		display: flex;
 		justify-content: center;
 		font-family: 'Work Sans';
 		font-weight: 400;
 		margin-bottom: 46px;
-		margin-top: 60px
+		margin-top: 60px;
+		
 	}
-	.gallery_modal {
-		display: flex;
-		margin: 0 auto;
-	}
-	
-	.modal-wrapper .gallery_modal {
+
+.gallery_modal {
 		width: 420px;
 		display: flex;	
 		flex-wrap: wrap;
@@ -471,29 +480,30 @@ footer nav ul {
 	
 	}
 	
-	.modal figure {
+.modal figure {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		width: 80px;
+		width: 78px;
 		height: 130px;
 		overflow: hidden;
-		padding-bottom: 10px;
+		
 	}
 	
-	figcaption{
+figcaption {
 		font-family: 'Work Sans';
 		font-size: 1em;
+		height: 25px;
 	}
 
-	.modal img {
+.modal img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
 	
-	aside .ajout {
+aside .ajout {
 		font-family: 'Syne';
 		font-size: 1em;
 		width: 237px;
@@ -637,6 +647,7 @@ select {
 
 /*ce qui suit concerne le mode edition*/
 #bandeau_mode_edition {
+	position: relative;
 	width: 100%;
 	display: flex;
 	grid-template-columns: auto auto 216px;
@@ -645,7 +656,20 @@ select {
 	background-color: #000000;
 	justify-content: center;
 	align-items: center;
+	z-index: 1;
 
+}
+
+#bandeau_noir {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	height: 58px;
+	background-color: #000000;
+	
+	justify-content: center;
+	align-items: center;
+	z-index: 0;
 }
 
 #bandeau_mode_edition i {
