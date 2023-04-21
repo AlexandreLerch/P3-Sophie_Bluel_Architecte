@@ -48,30 +48,32 @@ table {
 }
 /** end reset css**/
 
-
-
-/* ////////////MISE EN PAGE DE LA PAGE D'ACCUEIL//////////////*/
-main {
-	max-width: 1140px;
-	margin:auto;
-	paddin
-	font-family: 'Work Sans';
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: auto;
+	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
 
 header {
+	width: 100%;
 	max-width: 1140px;
-	margin:auto;
+	justify-content: space-between;
+}
+
+main {
+	width: 940px;
+	display: flex;
+	flex-direction: column;
+	
 }
 
 #bandeau_de_navigation {
 	display: flex;
 	justify-content: space-between;
-	margin: 38px 150px 92px 150px;
-}
-
-section {
-	margin: 50px 0
+	margin: 38px 0 92px 0;
 }
 
 h1{
@@ -128,24 +130,28 @@ li:hover {
 
 #introduction {
 	display: flex;
+	width: 100%;
+	justify-content: space-between;
 	align-items: center;
 	position: relative;
 }
 #introduction figure {
+	max-width: 434px;
 	flex: 1;
 	color: #000000;
 }
 
-#introduction img {
-	display: block;
-	margin: auto;
+#introduction figure img {
+	display: flex;
 	width: 100%;
+	height: 355px;
 }
 
 #introduction article {
+	margin-left: 72px;
+	max-width: 404px;
 	flex: 1;
-	margin-left: 71px;
-	margin-right: 245px ;
+	
 }
 
 #introduction h2 {
@@ -248,21 +254,20 @@ button:hover {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
+	grid-column-gap: auto;
 	grid-row-gap: 20px;
 }
 
 .gallery figure {
-	height: 400px;
-	width: 330px;
-	padding: 15px;
+	height: 440px;
+	width: 100%;
 	overflow: hidden;
 
 }
 
 .gallery img {
-	width: 100%;
-	height: 100%;
+	width: 300px;
+	height: 400px;
 	object-fit: cover;
 }
 
@@ -300,7 +305,11 @@ button:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-
+#contact .envoi {
+	width: 179px;
+	height: 36px;
+	padding: 0;
+}
 #contact form label {
 	display: flex;
 	margin: 2em 0 1em 0;
@@ -309,7 +318,7 @@ button:hover {
 
 #contact textarea {
 	border: none;
-	width: 100%;
+	width: 379px;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
@@ -325,15 +334,15 @@ button:hover {
 	border-radius: 60px ;
 }
 
+footer{
+	width: 1140px;
+	padding-right: 90px;
+}
+
 footer nav ul {
-	position: relative;
-	font-family: 'Work Sans';
-	right: 107px;
-	margin: auto;
-	margin-top: 44px;
 	display: flex;
 	justify-content: flex-end;
-	margin-bottom: 2em;
+	margin: 2em;
 }
 
 #login h2 {
@@ -386,9 +395,24 @@ footer nav ul {
 	text-decoration: underline;
 }
 
+#formulaire_de_connection {
+	display: flex;
+	justify-content: center;
+}
+
 #formulaire_de_connection #bouton_connection {
 	width: 179px;
 	height: 36px;
+	font-family: 'Syne';
+	font-size: 1em;
+	height: 36px;
+	border-radius: 120px;
+	background-color: #1D6154;
+	color: #fff;
+	font-weight: 700;
+	margin: auto;
+	margin-top: 35px;
+	margin-bottom: 28px;
 }
 
 /* ce qui suit concerne les modales */
@@ -406,7 +430,6 @@ footer nav ul {
 	overflow: scroll;
 }
 
-
 /* ce qui suit concerne la modale 1*/
 .modal-wrapper {
 	position: relative;
@@ -417,10 +440,9 @@ footer nav ul {
 	background-color: #FFFFFF;
 	padding-bottom: 48px;
 	border-radius: 3px;
-	
-	}
+}
 
-.js-modal-close {
+	.js-modal-close {
 		position: absolute;
 		top: 26px;
 		right: 30px;
@@ -433,7 +455,7 @@ footer nav ul {
 		background-color: transparent;
 	}
 	
-.js-modal-close2 {
+	.js-modal-close2 {
 		position: absolute;
 		top: 26px;
 		right: 30px;
@@ -446,7 +468,7 @@ footer nav ul {
 		background-color: transparent;
 	}
 	
-.js-modal-return {
+	.js-modal-return {
 		position: absolute;
 		background-color: transparent;
 		top: 26px;
@@ -459,60 +481,47 @@ footer nav ul {
 		align-items: center;
 	}
 	
-.modal-wrapper h2 {
+	.modal-wrapper h2 {
 		display: flex;
 		justify-content: center;
 		font-family: 'Work Sans';
 		font-weight: 400;
 		margin-bottom: 46px;
-		margin-top: 60px;
-		
+		margin-top: 60px
 	}
 
-.gallery_modal {
+	.modal-wrapper .gallery_modal {
 		width: 420px;
 		display: flex;	
 		flex-wrap: wrap;
 		justify-content: space-between;
+		margin: 0 auto;
 		padding-bottom: 46px;
 		border-bottom: solid 1px #B3B3B3;
+}
 	
-	}
-	
-.modal figure {
+	.modal figure {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		width: 78px;
+		width: 80px;
 		height: 130px;
 		overflow: hidden;
-		
+		padding-bottom: 10px;
 	}
 	
-figcaption {
+	figcaption{
 		font-family: 'Work Sans';
 		font-size: 1em;
-		height: 25px;
 	}
 
-.modal img {
+	.modal img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
 	
-aside .ajout {
-		font-family: 'Syne';
-		font-size: 1em;
-		width: 237px;
-		height: 36px;
-		border-radius: 120px;
-		background-color: #1D6154;
-		color: #fff;
-		font-weight: 700;
-		margin-top: 38px;
-	}
 	
 	.modal-wrapper h3 {
 		color: #D65353;
@@ -535,6 +544,7 @@ aside .ajout {
 	height: 169px;
 	background-color:  #E8F1F7;
 	border-radius: 3px;
+	margin-bottom: 30px;
 }
 
 
@@ -571,7 +581,7 @@ aside .ajout {
 	opacity: 0.5;
 	}
 
-.title-upload-image {
+.boite_grise .title-upload-image {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -590,31 +600,32 @@ aside .ajout {
 	}
 
 
-
-
 .boite_grise h3 {
 	margin-top: 7px;
 	font-size: 0.7em;
 	color: #444444;
 }
 
-#modal2 .ajout {
-	background-color: #A7A7A7;
-}
 
 #modal2 form {
 	display: flex;
+	align-items: center;
 	text-align: left;
 	margin-top: 30px;
 	flex-direction: column;
 	width: 420px;
 	padding-bottom: 27px;
-	border-bottom: solid 1px #B3B3B3;
 }
 
-#modal2 label {
+#modal2 .label {
+	width:100%;
 	margin-bottom: 10px;
 }
+
+#modal2 input {
+	width:100%;
+}
+
 
 .fenetre {
 	background-color: #FFFFFF;
@@ -625,13 +636,24 @@ aside .ajout {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#modal2 .ajout {
-	margin-top: 32px;
-	background-color: #A7A7A7;
-	color: #FFFFFF;
-	width: 179px;
-	border: none;
+.blanc {
+	width:420px;
+	height:26px;
+	border-bottom: solid 1px #B3B3B3;
 }
+
+aside .ajout {
+	font-family: 'Syne';
+	font-size: 1em;
+	width: 237px;
+	height: 36px;
+	border-radius: 120px;
+	background-color: #1D6154;
+	color: #fff;
+	font-weight: 700;
+	margin-top: 35px;
+}
+
 
 select {
 	background-color: #FFFFFF;
@@ -645,6 +667,13 @@ select {
 
 
 /*ce qui suit concerne le mode edition*/
+#bandeau_noir {
+	position: absolute;
+	width: 100%;
+	height: 58px;
+	background-color: #000000;
+}
+
 #bandeau_mode_edition {
 	position: relative;
 	width: 100%;
@@ -655,20 +684,7 @@ select {
 	background-color: #000000;
 	justify-content: center;
 	align-items: center;
-	z-index: 1;
 
-}
-
-#bandeau_noir {
-	position: absolute;
-	width: 100%;
-	display: flex;
-	height: 58px;
-	background-color: #000000;
-	
-	justify-content: center;
-	align-items: center;
-	z-index: 0;
 }
 
 #bandeau_mode_edition i {

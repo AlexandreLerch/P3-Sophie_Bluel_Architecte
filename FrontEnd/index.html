@@ -11,18 +11,10 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
-	<!-- ce qui suit correspond au bandeau que je dois rendre dynamique-->
-	<div id= "bandeau_noir" class="iflogged" style="display:none;">
-	</div>
-
 <body>
-
-
-
-
-	<header>
-
-	
+	<div id= "bandeau_noir" class="iflogged" style="display:none;"></div>
+<header>
+	<!-- ce qui suit correspond au bandeau que je dois rendre dynamique-->
 	<div id= "bandeau_mode_edition" class="iflogged" style="display:none;">
 		<i class="fa-sharp fa-regular fa-pen-to-square"></i>
 		<h2> Mode édition</h2>
@@ -46,7 +38,7 @@
 
 <main>
 	<section id="introduction">
-		<figure>
+		<figure id="sophie-bluel">
 			<img src="./assets/images/sophie-bluel.png" alt="">
 			<a href="#" class="iflogged" style="display:none;">
 				<div class ="modif modif2">
@@ -146,14 +138,15 @@
 				<input id = "ajout_image" type="file">
 				<h3>jpg, png : 4mo max</h3>
 			</div>
-			<label for="title" id="titleLabel">Titre</label>
+			<label for="title" id="titleLabel" class="label">Titre</label>
 			<input class= "fenetre" type="title" name="title" id="title">
-			<label for="category" id="categoryLabel">Catégorie</label>
+			<label for="category" id="categoryLabel" class="label">Catégorie</label>
 			<select class= "fenetre" name="category" name="category" id="category">
 				<!--<option value=1>Objets</option>
 				<option value=2>Appartements</option>
 				<option value=3>Hotels et Restaurants</option>-->
 			</select>
+			<div class="blanc"></div>
 			<button type="submit" id="validation" class="ajout">Valider</button>
 		</form>
 	</div>
