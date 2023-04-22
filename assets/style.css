@@ -221,6 +221,7 @@ main {
 
 #portfolio .projet_modif a {
 	margin-left : 31px;
+	text-decoration : none;
 }
 
 .filtres {
@@ -338,7 +339,7 @@ button:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact input[type="submit"]{
+#contact input[type="button"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;

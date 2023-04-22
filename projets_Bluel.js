@@ -118,8 +118,6 @@ async function genererProjetsModal() {
     //RECUPERATION DES WORKS EN FORMAT JSON
     let reponseModal = await fetch("http://localhost:5678/api/works")
     let projetsModal = await reponseModal.json();
-    console.log(projetsModal)
-
 
     //RECUPERATION DE L'ELEMENT DU DOM QUI ACCUEILLERA LES FIGURES
 const galleryModal = document.querySelector(".gallery_modal");
@@ -130,7 +128,6 @@ projetsModal.forEach(function(projetModal, i) {
     // Création d’une figure dédiée au projet dans la modale
     const figureModal = document.createElement("figure");
     figureModal.id = "figureModal" + projetModal.id;
-    //console.log(figureModal.id)
     figureModal.className = "figureModal";
     galleryModal.appendChild(figureModal);
 
@@ -156,12 +153,10 @@ projetsModal.forEach(function(projetModal, i) {
     // Création du bouton suppression dans la figure de la modale  
     const suppression = document.createElement("button");
     suppression.className = "boutonSuppression";
-    //suppression.id = projet.id
     suppression.type = "submit";
     figureModal.appendChild(suppression);
     const iconSuppression = document.createElement("i");
     iconSuppression.className = "fa-solid fa-trash-can";
-    //iconSuppression.src = "assets/icons/trash-can-solid.svg"
     suppression.appendChild(iconSuppression);
 
     ////AJOUT DE LA FONCTION QUI PERMET DE SUPPRIMER LES PROJETS/////////////////////
@@ -169,9 +164,6 @@ projetsModal.forEach(function(projetModal, i) {
         document.querySelector(".gallery_modal").removeChild(document.querySelector("#figureModal" + projetModal.id));
         document.querySelector(".gallery").removeChild(document.querySelector("#figure" + projetModal.id));
 
-        //const ids = projetsModal.map(projetsModal => projetsModal.id);
-        //console.log(ids); // Affiche [1, 2, 3]
-        console.log(projetModal.id);
         const id = projetModal.id;
         await fetch(`http://localhost:5678/api/works/${id}`, {
             method: "DELETE",
@@ -287,7 +279,6 @@ async function ajoutFigure () {
             //Ajout des id aux nouvelles figrues
             newFigureModal.id="figureModal"+data.id
             newFigureAccueil.id="figure" +data.id
-            console.log(newFigureModal)
 
             //Ajout des class aux nouvelles figrues
             newFigureModal.classList.add("figureModal");
@@ -322,7 +313,6 @@ async function ajoutFigure () {
             //Création des boutons déplacement
             const newBoutonDeplacement = document.createElement("button");
             newBoutonDeplacement.className = "boutonDeplacement"
-            //boutonDeplacement.id = i +1
             newFigureModal.appendChild(newBoutonDeplacement)
             const newIconDeplacement = document.createElement("i");
             newIconDeplacement.className = "fa-solid fa-arrows-up-down-left-right"
@@ -335,16 +325,12 @@ async function ajoutFigure () {
             newFigureModal.appendChild(newSuppression)
             const iconSuppression = document.createElement("i");
             iconSuppression.className = "fa-solid fa-trash-can"
-                    //iconSuppression.src = "assets/icons/trash-can-solid.svg"
             newSuppression.appendChild(iconSuppression)
         
             //"Mise en service" du bouton suppression pour les nouvelles figures de la modale
             newSuppression.addEventListener("click",function(){
-               // document.querySelector(".gallery_modal").removeChild(document.querySelector(".figureModal" + data.id))
-                //document.querySelector(".gallery").removeChild(document.querySelector(".figure" + data.id))
                 document.querySelector(`#${newFigureModal.id}`).style="display:none"
                 document.querySelector(`#${newFigureAccueil.id}`).style="display:none"
-                console.log(data.id)
     
                 const id = data.id
                 fetch(`http://localhost:5678/api/works/${id}`, {
