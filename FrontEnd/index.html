@@ -13,6 +13,7 @@
 </head>
 <body>
 	<div id= "bandeau_noir" class="iflogged" style="display:none;"></div>
+
 <header>
 	<!-- ce qui suit correspond au bandeau que je dois rendre dynamique-->
 	<div id= "bandeau_mode_edition" class="iflogged" style="display:none;">
@@ -37,6 +38,7 @@
 
 
 <main>
+	<!---------SECTION INTRO----------->
 	<section id="introduction">
 		<figure id="sophie-bluel">
 			<img src="./assets/images/sophie-bluel.png" alt="">
@@ -62,7 +64,7 @@
 		</article>
 	</section>
 
-	<!--section portfolio-->
+	<!---------SECTION PORTFOLIO----------->
 	<section id="portfolio">	
 		<div class= projet_modif>
 			<h2>Mes Projets</h2>
@@ -74,10 +76,6 @@
 			</a>
 		</div>
 		<div class="filtres">
-		<!--	
-			<button class="tous">Tous</button>
-			<br>
-		-->
 		</div>
 		<div class="gallery">
 			<!--<figure>
@@ -86,6 +84,9 @@
 			</figure>-->
 		</div>
 	</section>
+
+	
+	<!---------SECTION CONTACT----------->
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -109,22 +110,20 @@
 	</nav>
 </footer>
 
+
+<!---------MODALE 1----------->
 <aside id="modal1" class="modal" aria-hidden="true" aria-modal="false" role:"dialog" aria-labelledby="titlemodal" style="display:none">
 	<div class="modal-wrapper js-modal-stop">
 		<button class = 'js-modal-close'><i class="fa-solid fa-xmark"></i></button>
 		<h2 id="titlemodal">Galerie photo</h2>
-		<div class="gallery_modal">
-			<!--<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>-->
-		</div>
-	
+		<div class="gallery_modal"></div>
 		<button id= "ajout" class="ajout">ajouter une photo</button>
-	<h3>Supprimer la galerie</h3>
+		<h3>Supprimer la galerie</h3>
 	</div>     
 </aside>
 
+
+<!---------MODALE 2----------->
 <aside id="modal2" class="modal" aria-hidden="true" aria-modal="false" role:"dialog" aria-labelledby="titlemodal" style="display:none">
 	<div class="modal-wrapper js-modal-stop">
 		<button class = 'js-modal-return'><i class="fa-sharp fa-solid fa-arrow-left"></i></button>
