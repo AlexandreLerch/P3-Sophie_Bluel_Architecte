@@ -24,7 +24,6 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
                 sessionStorage.setItem('adminId', data.userId)
 
                 window.location.href="index.html" 
-
             })
            
             .catch(error => {
@@ -37,7 +36,6 @@ document.querySelector("#formulaire_de_connection").addEventListener("submit", f
     .catch(error => {
         console.log(error);
     });
-
 });
 
 
