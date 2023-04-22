@@ -145,12 +145,12 @@ nav li b {
 	border: 1px solid #1D6154;
 	margin: 0;
 	padding: 0 23px;
-	}
+}
 
 #bandeau_mode_edition button:hover {
-		color: white;
-		background-color: #1D6154;
-	}
+	color: white;
+	background-color: #1D6154;
+}
 
 #bandeau_noir {
 	position: absolute;
@@ -202,16 +202,6 @@ main {
 	margin-bottom: 0.5em;
 }
 /*****fin section introduction du code*****/
-
-
-/***fje ne sais pas à quoi cela corespond*****/
-li:hover {
-	color: #B1663C;
-}
-
-
-
-
 
 /********Portfolio ************/
 
@@ -311,6 +301,7 @@ button:hover {
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -334,6 +325,7 @@ button:hover {
 	height: 36px;
 	padding: 0;
 }
+
 #contact form label {
 	display: flex;
 	margin: 2em 0 1em 0;
@@ -375,11 +367,6 @@ footer nav ul {
 
 /******** PAGE DE CONNECTION ************/
 
-#login h2 {
-	text-align: center;
-	margin-bottom: 37px;
-}
-
 #login {
 	width: 33%;
 	margin: 112px auto 372px auto;
@@ -406,18 +393,6 @@ footer nav ul {
 
 #login label {
 	margin: 2em 0 1em 0;
-}
-
-#login textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-#login button {
-	margin : 2.2em auto 1.7em auto;
-	background-color: #1D6154;
-	color: #FFFFFF;
-	width: 179px;
 }
 
 #login a {
@@ -469,20 +444,8 @@ footer nav ul {
 	padding-bottom: 48px;
 	border-radius: 3px;
 }
+
 	.js-modal-close {
-		position: absolute;
-		top: 26px;
-		right: 30px;
-		display: flex;
-		border: none;
-		height: 2em;
-		width: 2em;
-		justify-content: center;	
-		align-items: center;
-		background-color: transparent;
-	}
-	
-	.js-modal-close2 {
 		position: absolute;
 		top: 26px;
 		right: 30px;
@@ -512,8 +475,8 @@ footer nav ul {
 		margin: 0 auto;
 		padding-bottom: 46px;
 		border-bottom: solid 1px #B3B3B3;
-}
-	
+	}
+
 	.modal figure {
 		position: relative;
 		display: flex;
@@ -525,7 +488,7 @@ footer nav ul {
 		padding-bottom: 10px;
 	}
 	
-	figcaption{
+	figcaption {
 		font-family: 'Work Sans';
 		font-size: 1em;
 	}
@@ -535,171 +498,15 @@ footer nav ul {
 		height: 100%;
 		object-fit: cover;
 	}
-	
+
 	.modal-wrapper h3 {
 		color: #D65353;
 		margin-top: 32px;
 	
 	}
 
-/* ce qui suit concerne la modale 2*/
+		/********** Animations sur la modale 1*********/
 
-#modal2 .modal-wrapper {
-	width: 630px;
-}
-
-.modal-wrapper .boite_grise {
-	display: flex;
-	position: relative;
-	flex-direction: column;
-	align-items: center;
-	width: 420px;
-	height: 169px;
-	background-color:  #E8F1F7;
-	border-radius: 3px;
-	margin-bottom: 30px;
-}
-
-.js-modal-return {
-	position: absolute;
-	background-color: transparent;
-	top: 26px;
-	left: 30px;
-	display: flex;
-	border: none;
-	height: 2em;
-	width: 2em;
-	justify-content: center;	
-	align-items: center;
-}
-
-#vignette {
-	display: flex;
-	max-height: 169px;
-	width: auto;
-	height: 100%;
-	position: absolute;
-	z-index: 0;
-}
-
-.modal-wrapper .fa-regular {
-	margin-top: 28px;
-	margin-bottom: 21px;;
-	font-size: 3.5em;
-	color: grey;
-}
-
-#ajout_image {
-	display: none;
-	align-items: center;
-	font-family: 'Syne';
-	font-size: 0.9em;
-	font-weight: 500;
-	width: 173px;
-	height: 36px;
-	padding: 0;
-	border: none;
-	border-radius: 60px;
-	background-color: #CBD6DC;
-	color: #306685;
-	font-weight: 700;
-	opacity: 0.5;
-}
-
-.boite_grise .title-upload-image {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-family: 'Syne';
-	font-size: 0.9em;
-	font-weight: 500;
-	width: 173px;
-	height: 36px;
-	padding: 0;
-	border: none;
-	border-radius: 60px;
-	background-color: #CBD6DC;
-	color: #306685;
-	font-weight: 700;
-	opacity: 0.5;
-}
-
-.boite_grise h3 {
-	margin-top: 7px;
-	font-size: 0.7em;
-	color: #444444;
-}
-
-
-#modal2 form {
-	display: flex;
-	align-items: center;
-	text-align: left;
-	margin-top: 30px;
-	flex-direction: column;
-	width: 420px;
-	padding-bottom: 27px;
-}
-
-#modal2 .label {
-	width:100%;
-	margin-bottom: 10px;
-}
-
-#modal2 input {
-	width:100%;
-}
-.fenetre {
-	background-color: #FFFFFF;
-	height: 50px;
-	margin-bottom: 21px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-.blanc {
-	width:420px;
-	height:26px;
-	border-bottom: solid 1px #B3B3B3;
-}
-
-aside .ajout {
-	font-family: 'Syne';
-	font-size: 1em;
-	width: 237px;
-	height: 36px;
-	border-radius: 120px;
-	background-color: #1D6154;
-	color: #fff;
-	font-weight: 700;
-	margin-top: 35px;
-}
-
-
-select {
-	background-color: #FFFFFF;
-	height: 50px;
-	width: 100%;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	font-size: 1.2em;
-}
-
-
-
-
-
-
-	#contact {
-		margin-top: 57px;
-	}
-
-	#marge_du_haut {
-		height: 12px;
-		width: 100%;
-	}
-	
 	.boutonSuppression {
 		display: flex;
 		justify-content: center;
@@ -746,16 +553,166 @@ select {
 		display: block;
 	}
 
-.test {
-	width: 330px;
-	height: 130px;
-	background-color: blue;
-}
+/********** fin des animations sur la modale 1*********/
 
-.figToAddInModal {
-	width: 78px;
-	height: 130px;
-}
+
+/********** fin du code qui concerne la modale 1*********/
+
+
+/*************** ce qui suit concerne la modale 2*********/
+	.js-modal-close2 {
+		position: absolute;
+		top: 26px;
+		right: 30px;
+		display: flex;
+		border: none;
+		height: 2em;
+		width: 2em;
+		justify-content: center;	
+		align-items: center;
+		background-color: transparent;
+	}
+	
+	.js-modal-return {
+		position: absolute;
+		background-color: transparent;
+		top: 26px;
+		left: 30px;
+		display: flex;
+		border: none;
+		height: 2em;
+		width: 2em;
+		justify-content: center;	
+		align-items: center;
+	}
+
+	#modal2 form {
+		display: flex;
+		align-items: center;
+		margin-top: 30px;
+		flex-direction: column;
+		width: 420px;
+		padding-bottom: 27px;
+	}
+
+	.modal-wrapper .boite_grise {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		align-items: center;
+		width: 420px;
+		height: 169px;
+		background-color:  #E8F1F7;
+		border-radius: 3px;
+		margin-bottom: 30px;
+	}
+
+	.modal-wrapper .fa-regular {
+		margin-top: 28px;
+		margin-bottom: 21px;;
+		font-size: 3.5em;
+		color: grey;
+	}
+
+	.boite_grise .title-upload-image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-family: 'Syne';
+		font-size: 0.9em;
+		font-weight: 500;
+		width: 173px;
+		height: 36px;
+		padding: 0;
+		border: none;
+		border-radius: 60px;
+		background-color: #CBD6DC;
+		color: #306685;
+		font-weight: 700;
+		opacity: 0.5;
+	}
+
+	.boite_grise h3 {
+		margin-top: 7px;
+		font-size: 0.7em;
+		color: #444444;
+	}
+
+	#ajout_image {
+	display: none;
+	align-items: center;
+	font-family: 'Syne';
+	font-size: 0.9em;
+	font-weight: 500;
+	width: 173px;
+	height: 36px;
+	padding: 0;
+	border: none;
+	border-radius: 60px;
+	background-color: #CBD6DC;
+	color: #306685;
+	font-weight: 700;
+	opacity: 0.5;
+	}
+
+	#vignette {
+		display: flex;
+		max-height: 169px;
+		width: auto;
+		height: 100%;
+		position: absolute;
+		z-index: 0;
+	}
+
+	#modal2 .label {
+		width:100%;
+		margin-bottom: 10px;
+	}
+
+	#modal2 input {
+		width:100%;
+		background-color: #FFFFFF;
+		height: 50px;
+		margin-bottom: 21px;
+		font-size: 1.2em;
+		border: none;
+		box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	}
+
+	select {
+		background-color: #FFFFFF;
+		height: 50px;
+		width: 100%;
+		border: none;
+		box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+		font-size: 1.2em;
+	}
+
+	.blanc {
+		width:420px;
+		height:26px;
+		border-bottom: solid 1px #B3B3B3;
+	}
+
+	aside .ajout {
+		font-family: 'Syne';
+		font-size: 1em;
+		width: 237px;
+		height: 36px;
+		border-radius: 120px;
+		background-color: #1D6154;
+		color: #fff;
+		font-weight: 700;
+		margin-top: 35px;
+	}
+
+	.figToAddInModal {
+		width: 78px;
+		height: 130px;
+	}
+/********** fin du code qui concerne la modale 2*********/
+
+
 /*****valable pour tout le site*****/
 .modif{
 	display: flex;
